@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/login.css">
+    <script type="text/javascript" src="../js/function.js"></script>
+    <title>注册</title>
+</head>
+<body>
+<div class="box">
+    <div class="content">
+        <div class="login-wrapper">
+            <h1>注册</h1>
+            <div class="login-form">
+                <form method="post">
+                    <div class="username form-item">
+                        <input id="alert" disabled class="input-item" value="">
+                    </div>
+                    <div class="username form-item">
+                        <span>使用QQ帐号</span>
+                        <input id="account" name="account" type="text" class="input-item" required="required">
+                    </div>
+                    <div class="password form-item">
+                        <span>密码</span>
+                        <input id="password" name="password" type="password" class="input-item">
+                    </div>
+                    <div class="password form-item">
+                        <span>密码</span>
+                        <input id="rePassword" type="password" class="input-item">
+                    </div>
+                    <div class="password form-item">
+                        <span>邀请码</span>
+                        <input id="inviteCode" name="inviteCode" type="password" class="input-item">
+                    </div>
+                    <input type="button" class="login-btn" value="注 册" onclick="formInfo()">
+                </form>
+            </div>
+            <div class="divider">
+                <span class="line"></span>
+                <span class="divider-text" onclick="window.location.replace('./login.html')">登录</span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    function formInfo(){
+        if (checkStrong()&&checkAccount()&&checkRegPassword()){
+            let accountValue = document.getElementById('account').value;
+            let passwordValue = document.getElementById('password').value;
+            let inviteValue = document.getElementById('inviteCode').value;
+            let url = "/system/register.php";
+
+            postInfo(accountValue,passwordValue,url,inviteValue)
+        }
+    }
+</script>
+</html>

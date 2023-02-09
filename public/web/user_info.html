@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>用户主页</title>
+    <link rel="stylesheet" type="text/css" href="../css/user_info.css">
+    <link rel="shortcut icon" href="../img/ico.webp">
+    <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div id="notice_1">
+    <div class="notice-box">
+        <span class="cancel-bar">.</span>
+        <span class="cancel" onclick="$('#notice_1').fadeOut(200)">X</span>
+        <h2>告知</h2>
+        <p>本站点</p>
+    </div>
+</div>
+<h2 class="welcome">Welcome</h2>
+<h2 class="welcome" id="user_name"></h2>
+<div id="head"></div>
+<div class="box" id="user_info">
+    <div class="box-two">
+        <p>MCOfflineSkin仅支持PNG格式图像</p>
+        <form action="/system/upload.php" method="post" id="files" target="iframe" enctype="multipart/form-data">
+            <p>请选择您要上传的文件：</p>
+            <div class="up_file" onclick="chooseFiles()">
+                <span id="file_select">选择图像</span>
+                <input type="file" id="file" name='myFile' onchange="displayText()">
+            </div>
+            <span id="fileName"></span>
+            <input class="text-bar" type="text" name="reNameFile" required="required" placeholder="请输入您的Minecraft用户名">
+            <br>
+            <input class="btn" type="submit" value="上传文件">
+        </form>
+    </div>
+</div>
+<div class="box" id="reset">
+    <div class="box-two">
+        <p>重置用户信息</p>
+        <form action="/system/reset_password.php" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong()">
+            <input type="password" name="resetPassword" id="password" placeholder="新密码" class="text-bar">
+            <input value="重置密码" class="btn" type="submit" id="reset_password_btn">
+        </form>
+    </div>
+    <div class="box-two">
+        <form action="/system/reset_skin.php" method="post" target="iframe" onsubmit="return confirm('确定要重置皮肤吗?')">
+            <input class="btn" type="submit" value="重置皮肤" id="reset_skin_btn">
+        </form>
+    </div>
+</div>
+<div class="box" id="download_box">
+    <div class="box-two">
+        <p>资源下载</p>
+        <button class="btn">
+            <a href="download.php">Download</a>
+        </button>
+        <p>其他站点</p>
+        <button class="btn">
+            <a href="https://www.mcmod.cn">MCMOD</a>
+        </button>
+        <button class="btn">
+            <a href="https://www.curseforge.com/minecraft/modpacks">Curseforge</a>
+        </button>
+        <button class="btn">
+            <a href="https://www.mcbbs.net/portal.php">MCBBS</a>
+        </button>
+    </div>
+</div>
+<iframe name="iframe" style="display: none"></iframe>
+<div id="footer"></div>
+</body>
+<script type="text/javascript" src="../js/function.js"></script>
+<script type="text/javascript">
+    //显示文件名
+    function chooseFiles() {
+        let file_btn = document.querySelector('.up_file');
+        let file_input = file_btn.querySelector('#file');
+        file_input.click();
+    }
+    function displayText() {
+        let fileName1 = document.getElementById('file').value;
+        document.getElementById('fileName').innerText = fileName1.substring(fileName1.lastIndexOf("\\"));
+    }
+
+    window.onload = document.getElementById('user_name').innerText = getPar('file');
+</script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/login.css">
+    <script type="text/javascript" src="../js/function.js"></script>
+    <link rel="shortcut icon" href="../img/ico.webp">
+    <title>Login</title>
+</head>
+<body>
+<div class="box">
+    <div class="content">
+        <div class="login-wrapper">
+            <h1>登录</h1>
+            <div class="login-form">
+                <form method="post">
+                <div class="username form-item">
+                    <input id="alert" disabled class="input-item" value="">
+                </div>
+                <div class="username form-item">
+                    <span>使用QQ帐号</span>
+                    <input id="account" name="account" type="text" class="input-item">
+                </div>
+                <div class="password form-item">
+                    <span>密码</span>
+                    <input id="password" name="password" type="password" class="input-item">
+                </div>
+                <input type="button" class="login-btn" value="登 录" onclick="formInfo()">
+                </form>
+            </div>
+            <div class="divider">
+                <span class="line"></span>
+                <span class="divider-text" onclick="window.location.replace('./register.html')">注册</span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function formInfo() {
+        let accountValue = document.getElementById('account').value;
+        let passwordValue = document.getElementById('password').value;
+        if (accountValue === '' || passwordValue === ''){
+            document.getElementById('alert').style.display='block';
+            document.getElementById('alert').value='账号或密码不能为空';
+            return
+        }
+        let url = "/system/login.php";
+
+        postInfo(accountValue,passwordValue,url);
+    }
+</script>
+</body>
+</html>
