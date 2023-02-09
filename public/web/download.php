@@ -1,10 +1,11 @@
-<-?php
+<?php
 require_once '../function.php';
+require_once "../record.php";
 
 if (!(ifLogin())){
-    exit("<script>alert('请登录在浏览哦');window.location='public/web/login.html'</script>");
+    exit("<script>//alert('请登录在浏览哦');window.location='public/web/login.html'</script>");
 }
-?->
+?>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -19,13 +20,13 @@ if (!(ifLogin())){
     <div class="box">
         <p>test</p>
         <button class="down_button" value="test" onclick="downloadFileOne()">
-            <p>test</p>
+            test
         </button>
     </div>
     <div class="box">
         <p>服务器用客户端</p>
         <button class="down_button" value="mods" onclick="downloadFileTwo()">
-            <p>mods</p>
+            mods
         </button>
     </div>
     <div class="box">
@@ -37,7 +38,7 @@ if (!(ifLogin())){
     <div class="box">
         <p>整合包</p>
         <button class="down_button">
-            <p>Lightmod_pre2</p>
+            Lightmod_pre2
         </button>
     </div>
     <div id="footer">

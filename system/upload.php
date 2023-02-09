@@ -1,6 +1,7 @@
 
 <?php
 require_once '../public/function.php';
+require_once "../public/record.php";
 
 if (!(ifLogin())){
     exit("<script>alert('请登录在浏览哦');window.location='public/web/login.html'</script>");
@@ -47,9 +48,10 @@ if ($result->num_rows>0){
 }
 */
 
-$sql = "SELECT state = '0' FROM mc_users WHERE account = '$user'";
+$sql = "SELECT account = '$user' FROM mc_users WHERE state = true";
 $result = mysqli_query($conn,$sql);
-if ($result) {
+$result = mysqli_num_rows($result);
+if ($result > 0) {
     mysqli_close($conn);
     exit("<script>alert('请勿重复上传');history.go(-1)</script>");
 }

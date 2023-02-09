@@ -5,6 +5,8 @@ header("content-type:text/html;charset=utf-8");
 
 //error_reporting(0);
 
+require_once "../public/record.php";
+
 //接收$_POST用户名和密码
 $account=$_POST['account'];
 $password=$_POST['password'];

@@ -4,6 +4,7 @@
 header("content-type:text/html;charset=utf-8");
 
 //error_reporting(0);
+require_once "../public/record.php";
 
 $account = $_POST['account'];
 $password = $_POST['password'];

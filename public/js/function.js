@@ -161,3 +161,5 @@ function callBackCodeReg(result){
             alert('Unknown Error');
     }
 }
+
+//TODO 不使用jQ实现淡入
