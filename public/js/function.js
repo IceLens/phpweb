@@ -86,7 +86,6 @@ function postInfo(account,password,url,inviteCode) {
         callBackCodeReg(result);
     }
     xhr.open("post", url, true);
-    let passHash = Crypto.
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send("account="+ account + "&password="+ password + "&code="+ inviteCode);
 }
