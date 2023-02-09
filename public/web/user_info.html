@@ -8,16 +8,35 @@
     <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
-<div id="notice_1">
-    <div class="notice-box">
+
+<div id="notice_1" class="notice-box">
+    <div class="notice">
         <span class="cancel-bar">.</span>
         <span class="cancel" onclick="$('#notice_1').fadeOut(200)">X</span>
         <h2>告知</h2>
-        <p>本站点</p>
+        <p>本站点用于Minecraft服务器公告，成员离线皮肤的更改，以及一些资源的分享。</p>
     </div>
 </div>
-<h2 class="welcome">Welcome</h2>
-<h2 class="welcome" id="user_name"></h2>
+<div id="notice_2" class="notice-box">
+    <div class="notice">
+        <span class="cancel-bar">.</span>
+        <span class="cancel" onclick="$('#notice_2').fadeOut(200)">X</span>
+        <h2>公告</h2>
+        <p>暂无公告</p>
+    </div>
+</div>
+
+<div id="bar">
+    <span class="welcome">欢迎</span>
+    <span class="welcome" id="user_name"></span>
+    <span id="announce">通知
+        <ul>
+            <li><p onclick="$('#notice_1').fadeIn(150)">首页告知</p></li>
+            <li><p onclick="$('#notice_2').fadeIn(150)">最新公告</p></li>
+        </ul>
+    </span>
+</div>
+
 <div id="head"></div>
 <div class="box" id="user_info">
     <div class="box-two">
