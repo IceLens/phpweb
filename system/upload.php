@@ -1,4 +1,3 @@
-
 <?php
 require_once '../public/function.php';
 require_once "../public/record.php";
@@ -65,6 +64,7 @@ if (file_exists($savePath)){
     mysqli_close($conn);
     exit("<script>alert('名称重复');history.go(-1)</script>");
 }
+
 /*
 $sql_check_repetition = "SELECT skin_path FROM mc_users WHERE skin_path = '$savePath'";
 $result = mysqli_query($conn,$sql_check_repetition);
@@ -104,6 +104,7 @@ $stmt = $conn->prepare("UPDATE mc_users SET skin_path = '$savePath' WHERE accoun
 $stmt->execute();
 $result = $stmt->get_result();
 */
+
 $sql_path = "UPDATE mc_users SET skin_path = '$savePath' WHERE account = '$user'";
 $result = mysqli_query($conn,$sql_path);
 if(!($result)){

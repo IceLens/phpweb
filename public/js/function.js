@@ -48,7 +48,6 @@ function checkAccount() {
     else {
         document.getElementById('alert').style.display='block';
         document.getElementById('alert').value='账号格式错误';
-        //alert("账号格式错误");
         return false;
     }
 }
@@ -90,23 +89,21 @@ function postInfo(account,password,url,inviteCode) {
     xhr.send("account="+ account + "&password="+ password + "&code="+ inviteCode);
 }
 
+//登录页面提示
 function callBackCodeLogin(result){
     let style = document.getElementById('alert');
     switch (result.code){
         case 0 :
             style.style.display='block';
             style.value='账号或密码不能为空';
-            //alert('账号或密码不能为空');
             break;
         case 1 :
             style.style.display='block';
             style.value='您还没有注册';
-            //alert('您还没有注册');
             break;
         case 2 :
             style.style.display='block';
             style.value='账号或密码有误';
-            //alert('账号或密码有误');
             break;
         case 3 :
             function jump(){window.location = result.data["web"] + result.data["user"]}
@@ -117,30 +114,28 @@ function callBackCodeLogin(result){
             style.style.display='block';
             style.value='登录成功';
 
-            setTimeout(jump,1500);
+            setTimeout(jump,800);
             break;
         default :
             alert('Unknown Error')
     }
 }
 
+//注册页面提示
 function callBackCodeReg(result){
     let style = document.getElementById('alert');
     switch (result.code){
         case 0 :
             style.style.display='block';
             style.value='账号或密码不能为空';
-            //alert('账号或密码不能为空');
             break;
         case 1 :
             style.style.display='block';
             style.value='邀请码错误';
-            //alert('邀请码错误');
             break;
         case 2 :
             style.style.display='block';
             style.value='账号已经存在';
-            //alert('账号已经存在');
             break;
         case 3 :
             alert('服务器错误')
@@ -154,12 +149,40 @@ function callBackCodeReg(result){
             style.style.display='block';
             style.value='注册成功';
 
-            setTimeout(jump,1500);
-            //alert('注册成功');
+            setTimeout(jump,800);
             break;
         default :
             alert('Unknown Error');
     }
 }
 
-//TODO 不使用jQ实现淡入
+//淡入淡出
+function fadeInS(element,speed){
+    let ele = document.getElementById(element);
+    if (ele.style.opacity !=='1'){
+        ele.style.display='block';
+        let num = 0;
+        let st = setInterval(function (){
+            num++;
+            ele.style.opacity = num/10;
+            if (num >= 10){
+                clearInterval(st);
+            }
+        },speed);
+    }
+}
+
+function fadeOutS(element,speed){
+    let ele = document.getElementById(element);
+    if (ele.style.opacity !=='0'){
+        let num = 10;
+        let st = setInterval(function (){
+            num--;
+            ele.style.opacity = '0.'+num;
+            if (num <= 0){
+                clearInterval(st);
+                ele.style.display = 'none'
+            }
+        },speed);
+    }
+}

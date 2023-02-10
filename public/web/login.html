@@ -47,6 +47,9 @@
             document.getElementById('alert').value='账号或密码不能为空';
             return
         }
+        if (!(checkAccount())){
+            return;
+        }
         let url = "/system/login.php";
 
         postInfo(accountValue,passwordValue,url);

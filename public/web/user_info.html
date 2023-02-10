@@ -5,14 +5,14 @@
     <title>用户主页</title>
     <link rel="stylesheet" type="text/css" href="../css/user_info.css">
     <link rel="shortcut icon" href="../img/ico.webp">
-    <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!--script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script-->
 </head>
 <body>
 
 <div id="notice_1" class="notice-box">
     <div class="notice">
         <span class="cancel-bar">.</span>
-        <span class="cancel" onclick="$('#notice_1').fadeOut(200)">X</span>
+        <span class="cancel" onclick="fadeOutS('notice_1',15)">X</span>
         <h2>告知</h2>
         <p>本站点用于Minecraft服务器公告，成员离线皮肤的更改，以及一些资源的分享。</p>
     </div>
@@ -20,7 +20,7 @@
 <div id="notice_2" class="notice-box">
     <div class="notice">
         <span class="cancel-bar">.</span>
-        <span class="cancel" onclick="$('#notice_2').fadeOut(200)">X</span>
+        <span class="cancel" onclick="fadeOutS('notice_2',15)">X</span>
         <h2>公告</h2>
         <p>暂无公告</p>
     </div>
@@ -31,8 +31,8 @@
     <span class="welcome" id="user_name"></span>
     <span id="announce">通知
         <ul>
-            <li><p onclick="$('#notice_1').fadeIn(150)">首页告知</p></li>
-            <li><p onclick="$('#notice_2').fadeIn(150)">最新公告</p></li>
+            <li><p onclick="fadeInS('notice_1',10)">首页告知</p></li>
+            <li><p onclick="fadeInS('notice_2',10)">最新公告</p></li>
         </ul>
     </span>
 </div>
@@ -102,6 +102,6 @@
         document.getElementById('fileName').innerText = fileName1.substring(fileName1.lastIndexOf("\\"));
     }
 
-    window.onload = document.getElementById('user_name').innerText = getPar('file');
+    window.onload = document.getElementById('user_name').innerText = getPar('user');
 </script>
 </html>
