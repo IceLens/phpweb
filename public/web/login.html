@@ -40,19 +40,10 @@
 </div>
 <script type="text/javascript">
     function formInfo() {
-        let accountValue = document.getElementById('account').value;
-        let passwordValue = document.getElementById('password').value;
-        if (accountValue === '' || passwordValue === ''){
-            document.getElementById('alert').style.display='block';
-            document.getElementById('alert').value='账号或密码不能为空';
-            return
+        if (checkAccount() && checkNull()){
+            let url = "/system/login.php";
+            postInfo(url);
         }
-        if (!(checkAccount())){
-            return;
-        }
-        let url = "/system/login.php";
-
-        postInfo(accountValue,passwordValue,url);
     }
 </script>
 </body>

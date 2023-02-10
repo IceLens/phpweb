@@ -132,6 +132,14 @@
   .box .content .login-wrapper .divider .divider-text {
     color: #fff;
   }
+  #alert {
+    text-align: center;
+    background-color: rgba(236,23,0,0.4);
+    border-color: #ec1700;
+    color: #ff0000;
+    font-size: 30px;
+    display: none;
+  }
 }
 /*手机端CSS*/
 @media (max-width: 768px) {
@@ -176,13 +184,12 @@
   .box .content .login-wrapper .divider .divider-text {
     color: #fff;
   }
+  #alert {
+    text-align: center;
+    background-color: rgba(236,23,0,0.4);
+    border-color: #ec1700;
+    color: #ff0000;
+    font-size: 20px;
+    display: none;
+  }
 }/*# sourceMappingURL=login.css.map */
-
-#alert {
-  text-align: center;
-  background-color: rgba(236,23,0,0.4);
-  border-color: #ec1700;
-  color: #ff0000;
-  font-size: 30px;
-  display: none;
-}

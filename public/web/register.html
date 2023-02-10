@@ -48,13 +48,11 @@
 </body>
 <script type="text/javascript">
     function formInfo(){
-        if (checkStrong()&&checkAccount()&&checkRegPassword()){
-            let accountValue = document.getElementById('account').value;
-            let passwordValue = document.getElementById('password').value;
+        if (checkAccount()&&checkStrong()&&checkRegPassword()){
             let inviteValue = document.getElementById('inviteCode').value;
             let url = "/system/register.php";
 
-            postInfo(accountValue,passwordValue,url,inviteValue)
+            postInfo(url,inviteValue)
         }
     }
 </script>

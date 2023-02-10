@@ -1,3 +1,31 @@
+//QQ号检查
+function checkAccount() {
+    let accountValue  = document.getElementById("account").value;
+    let pattern = /^[1-9][0-9]{4,12}$/;
+
+    if (pattern.test(accountValue)){
+        return true
+    }
+    else {
+        document.getElementById('alert').style.display='block';
+        document.getElementById('alert').value='账号格式错误';
+        return false;
+    }
+}
+
+//检查输入是否为空
+function checkNull() {
+    let accountValue = document.getElementById('account').value;
+    let passwordValue = document.getElementById('password').value;
+
+    if (accountValue === '' || passwordValue === ''){
+        document.getElementById('alert').style.display='block';
+        document.getElementById('alert').value='账号或密码不能为空';
+        return false
+    }
+    return true
+}
+
 //密码初次校验
 function checkRegPassword() {
     let rePasswordArea = document.getElementById("rePassword");
@@ -37,20 +65,6 @@ function checkStrong() {
      }
 }
 
-//QQ号检查
-function checkAccount() {
-    let accountValue  = document.getElementById("account").value;
-    let pattern = /[1-9][0-9]{4,}/;
-
-    if (pattern.test(accountValue)){
-        return true
-    }
-    else {
-        document.getElementById('alert').style.display='block';
-        document.getElementById('alert').value='账号格式错误';
-        return false;
-    }
-}
 
 //GET 用户名
 function getPar(par){
@@ -70,7 +84,9 @@ function getPar(par){
 }
 
 //向后端发送
-function postInfo(account,password,url,inviteCode) {
+function postInfo(url,inviteCode) {
+    let account = document.getElementById('account').value;
+    let password = document.getElementById('password').value;
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (!(xhr.readyState === 4)) {
