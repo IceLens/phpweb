@@ -3,7 +3,7 @@ require_once '../public/function.php';
 require_once "../public/record.php";
 
 if (!(ifLogin())){
-    exit("<script>alert('请登录在浏览哦');window.location='public/web/login.html'</script>");
+    exit("<script>alert('请登录在浏览哦');window.location='/public/web/login.html'</script>");
 }
 
 header("content-type:text/html;charset=utf-8");
@@ -31,21 +31,13 @@ if ($size > 4096) {
 }
 
 //数据库验证
-$conn = mysqli_connect("localhost","mu8th1shwn","Nfxk:v6_2Y753S:","mu8th1shwn");
+//$conn = mysqli_connect("localhost","mu8th1shwn","Nfxk:v6_2Y753S:","mu8th1shwn");
 
-session_start();
-
+//session_start();
+require './conn_sql.php';
+global $conn;
 //登录及重复上传检查
 $user = $_SESSION [ 'user' ];
-
-//$sql = "SELECT * FROM mc_users WHERE account = '$user' AND state = true";
-/*
-$result = $conn->query($sql);
-if ($result->num_rows>0){
-    mysqli_close($conn);
-    exit("<script>alert('请勿重复上传');history.go(-1)</script>");
-}
-*/
 
 $sql = "SELECT account = '$user' FROM mc_users WHERE state = true";
 $result = mysqli_query($conn,$sql);
@@ -56,7 +48,7 @@ if ($result > 0) {
 }
 
 //重名检测
-$filepath = '../saveFiles/';
+$filepath = '../saveFiles/'; //线上为 '/server/skins'
 $reName = $_POST['reNameFile'];
 $savePath = $filepath . $reName . '.png';
 
@@ -64,14 +56,6 @@ if (file_exists($savePath)){
     mysqli_close($conn);
     exit("<script>alert('名称重复');history.go(-1)</script>");
 }
-
-/*
-$sql_check_repetition = "SELECT skin_path FROM mc_users WHERE skin_path = '$savePath'";
-$result = mysqli_query($conn,$sql_check_repetition);
-if ($result){
-    mysqli_close($conn);
-    exit("<script>alert('名称重复');history.go(-1)</script>");
-}*/
 
 //上传
 if (!(move_uploaded_file($tmp, $filepath . $imgName))) {
@@ -99,12 +83,7 @@ if (!($imgName)) {
     exit("<script>alert('上传失败 3');history.go(-1)</script>");
 }
 
-/*
-$stmt = $conn->prepare("UPDATE mc_users SET skin_path = '$savePath' WHERE account = '$user'");
-$stmt->execute();
-$result = $stmt->get_result();
-*/
-
+//保存皮肤路径
 $sql_path = "UPDATE mc_users SET skin_path = '$savePath' WHERE account = '$user'";
 $result = mysqli_query($conn,$sql_path);
 if(!($result)){

@@ -1,11 +1,11 @@
-<?php
+<!--?php
 require_once '../function.php';
 require_once "../record.php";
 
 if (!(ifLogin())){
     exit("<script>//alert('请登录在浏览哦');window.location='public/web/login.html'</script>");
 }
-?>
+?-->
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -32,7 +32,7 @@ if (!(ifLogin())){
     <div class="box">
         <p>服务器用客户端</p>
         <button class="down_button">
-            <a href="/saveFiles/mods.zip" download="client.zip">Client-1.2</a>
+            <a href="/saveFiles/test.png" download="client.zip">Client-1.2</a>
         </button>
     </div>
     <div class="box">

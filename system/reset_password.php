@@ -2,11 +2,14 @@
 require_once '../public/function.php';
 
 if (!(ifLogin())){
-    exit("<script>alert('请登录在浏览哦');window.location='public/web/login.html'</script>");
+    exit("<script>alert('请登录在浏览哦');window.location='/public/web/login.html'</script>");
 }
-session_start();
 
-$conn = mysqli_connect("localhost","mu8th1shwn","Nfxk:v6_2Y753S:","mu8th1shwn");
+require './conn_sql.php';
+global $conn;
+//session_start();
+
+//$conn = mysqli_connect("localhost","mu8th1shwn","Nfxk:v6_2Y753S:","mu8th1shwn");
 $user = $_SESSION [ 'user' ];//Account
 
 //error_reporting(0);

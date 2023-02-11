@@ -3,6 +3,7 @@
 }
 body {
     background-color: #DFEAF8FF;
+    overflow-x: hidden;
 }
 #head {
     top: 60px;
@@ -74,7 +75,6 @@ body {
         backdrop-filter: blur(6px);
     }
     .notice {
-        /*pointer-events: none;*/
         position: relative;
         width: 500px;
         height: 300px;
@@ -84,6 +84,14 @@ body {
         box-shadow: #a2a2a2 1px 1px 4px;
         border-radius: 6px;
         text-align: center;
+    }
+    .notice .scroll-bar {
+        position: absolute;
+        top: 70px;
+        left: 20px;
+        overflow-y: scroll;
+        width: 480px;
+        height: 210px;
     }
     .notice .cancel-bar {
         display: inline-block;
@@ -174,6 +182,15 @@ body {
         box-shadow: #a2a2a2 1px 1px 4px;
         border-radius: 6px;
         text-align: center;
+    }
+    .notice .scroll-bar {
+        position: absolute;
+        top: 70px;
+        left: 20px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        width: 180px;
+        height: 310px;
     }
     .notice .cancel-bar {
         display: inline-block;

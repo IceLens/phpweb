@@ -62,8 +62,8 @@
 }
 .box .content .login-wrapper .divider .divider-text {
   vertical-align: middle;
-  margin: 0px 20px;
-  line-height: 0px;
+  margin: 0 20px;
+  line-height: 0;
   display: inline-block;
   width: 100px;
 }
@@ -135,6 +135,7 @@
   #alert {
     text-align: center;
     background-color: rgba(236,23,0,0.4);
+    backdrop-filter: blur(4px);
     border-color: #ec1700;
     color: #ff0000;
     font-size: 30px;
