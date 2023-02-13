@@ -32,7 +32,7 @@ if (!(ifLogin())){
     <div class="box">
         <p>服务器用客户端</p>
         <button class="down_button">
-            <a href="/saveFiles/test.png" download="client.zip">Client-1.2</a>
+            <a href="/saveFiles/skins/test.png" download="client.zip">Client-1.2</a>
         </button>
     </div>
     <div class="box">

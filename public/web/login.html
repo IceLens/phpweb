@@ -27,7 +27,7 @@
                     <span>密码</span>
                     <input id="password" name="password" type="password" class="input-item">
                 </div>
-                <input type="button" class="login-btn" value="登 录" onclick="formInfo()">
+                <input type="button" class="login-btn" value="登 录" onclick="postInfo()">
                 </form>
             </div>
             <div class="divider">
@@ -39,10 +39,54 @@
     </div>
 </div>
 <script type="text/javascript">
-    function formInfo() {
-        if (checkAccount() && checkNull()){
-            let url = "/system/login.php";
-            postInfo(url);
+    //向后端发送
+    function postInfo() {
+        if (!(checkAccount() && checkNull())){
+            return;
+        }
+        let account = document.getElementById('account').value;
+        let password = document.getElementById('password').value;
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (!(xhr.readyState === 4)) {
+                return;
+            }
+            let result = JSON.parse(this.responseText);
+            callBackCodeLogin(result);
+        }
+        xhr.open("post", '/system/login.php', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("account="+ account + "&password="+ password);
+    }
+    //登录页面提示
+    function callBackCodeLogin(result){
+        let style = document.getElementById('alert');
+        switch (result.code){
+            case 0 :
+                style.style.display='block';
+                style.value='账号或密码不能为空';
+                break;
+            case 1 :
+                style.style.display='block';
+                style.value='您还没有注册';
+                break;
+            case 2 :
+                style.style.display='block';
+                style.value='账号或密码有误';
+                break;
+            case 3 :
+            function jump(){window.location = result.data["web"] + result.data["user"]}
+
+                style.style.color='#00FF44FF';
+                style.style.backgroundColor='rgba(0, 255, 68, 0.4)';
+                style.style.borderColor='#18c300';
+                style.style.display='block';
+                style.value='登录成功';
+
+                setTimeout(jump,800);
+                break;
+            default :
+                alert('Unknown Error')
         }
     }
 </script>

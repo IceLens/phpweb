@@ -79,7 +79,7 @@ function checkStrong() {
  * @param par
  * @returns {string}
  */
-//GET 用户名
+//GET
 function getPar(par){
 
     const local_url = document.location.href;
@@ -131,100 +131,3 @@ function fadeOutS(element,speed){
         },speed);
     }
 }
-
-/**
- * 接受后端数据并判断
- *
- * @param url
- * @param inviteCode
- */
-
-//向后端发送
-function postInfo(url,inviteCode) {
-    let account = document.getElementById('account').value;
-    let password = document.getElementById('password').value;
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (!(xhr.readyState === 4)) {
-            return;
-        }
-        if (inviteCode == null){
-            let result = JSON.parse(this.responseText);
-            callBackCodeLogin(result);
-            return;
-        }
-        let result = JSON.parse(this.responseText);
-        callBackCodeReg(result);
-    }
-    xhr.open("post", url, true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("account="+ account + "&password="+ password + "&code="+ inviteCode);
-}
-
-//登录页面提示
-function callBackCodeLogin(result){
-    let style = document.getElementById('alert');
-    switch (result.code){
-        case 0 :
-            style.style.display='block';
-            style.value='账号或密码不能为空';
-            break;
-        case 1 :
-            style.style.display='block';
-            style.value='您还没有注册';
-            break;
-        case 2 :
-            style.style.display='block';
-            style.value='账号或密码有误';
-            break;
-        case 3 :
-            function jump(){window.location = result.data["web"] + result.data["user"]}
-
-            style.style.color='#00FF44FF';
-            style.style.backgroundColor='rgba(0, 255, 68, 0.4)';
-            style.style.borderColor='#18c300';
-            style.style.display='block';
-            style.value='登录成功';
-
-            setTimeout(jump,800);
-            break;
-        default :
-            alert('Unknown Error')
-    }
-}
-
-//注册页面提示
-function callBackCodeReg(result){
-    let style = document.getElementById('alert');
-    switch (result.code){
-        case 0 :
-            style.style.display='block';
-            style.value='账号或密码不能为空';
-            break;
-        case 1 :
-            style.style.display='block';
-            style.value='邀请码错误';
-            break;
-        case 2 :
-            style.style.display='block';
-            style.value='账号已经存在';
-            break;
-        case 3 :
-            alert('服务器错误')
-            break;
-        case 4 :
-            function jump(){window.location = './login.html'}
-
-            style.style.color='#00FF44FF';
-            style.style.backgroundColor='rgba(0, 255, 68, 0.4)';
-            style.style.borderColor='#18c300';
-            style.style.display='block';
-            style.value='注册成功';
-
-            setTimeout(jump,800);
-            break;
-        default :
-            alert('Unknown Error');
-    }
-}
-

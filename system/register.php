@@ -4,8 +4,6 @@ header("content-type:text/html;charset=utf-8");
 
 //error_reporting(0);
 
-require_once "../public/record.php";
-
 //接收$_POST用户名和密码
 $account=$_POST['account'];
 $password=$_POST['password'];
@@ -49,7 +47,7 @@ $passAndAccount = $account .$password;
 
 //写入注册数据
 $passHash = password_hash($passAndAccount,PASSWORD_BCRYPT);
-$sql="insert into mc_users(account, password, state,skin_path) VALUES ('$account','$passHash',false,'NONE')";
+$sql="INSERT INTO mc_users(account, password, skin_path, cape_path) VALUES ('$account','$passHash',null,null)";
 $result = mysqli_query($conn,$sql);
 if(!($result)){
     $result = array("code"=>3);

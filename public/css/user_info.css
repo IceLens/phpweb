@@ -265,7 +265,7 @@ body {
     cursor: pointer;
     opacity: .8;
 }
-#file_select{
+.select{
     left: 10px;
     top: 15%;
     position: relative;
@@ -279,7 +279,7 @@ input[type=file] {
     top: 20px;
 }
 .text-bar {
-    margin: 40px 45px;
+    margin: 30px 45px;
     height: 20px;
     width: 200px;
     border-radius: 4px;

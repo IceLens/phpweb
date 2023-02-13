@@ -1,13 +1,81 @@
 <?php
+header("content-type:text/html;charset=utf-8");
+//error_reporting(0);
 require_once '../public/function.php';
-require_once "../public/record.php";
 
 if (!(ifLogin())){
     exit("<script>alert('请登录在浏览哦');window.location='/public/web/login.html'</script>");
 }
 
-header("content-type:text/html;charset=utf-8");
-//error_reporting(0);
+function upLoad($savePath) : string
+{
+    global $tmp,$imgName;
+    $newName = $_POST['reNameFile'];
+    $filePath = $savePath . $newName . '.png';
+
+    if (file_exists($filePath)){
+        die("<script>alert('名称重复');history.go(-1)</script>");
+    }
+    if (!(move_uploaded_file($tmp, $savePath . $imgName))) {
+        die("<script>alert('上传失败 1');history.go(-1)</script>");
+    }
+    $reName = rename( $savePath . $imgName,$savePath . $newName . ".png");
+    if (!($reName)) {
+        die("<script>alert('上传失败 3');history.go(-1)</script>");
+    }
+    return $newName;
+}
+
+function updateSkin($user) : bool
+{
+    global $conn;
+    $sql = "SELECT account = $user FROM mc_users WHERE skin_path IS NULL";
+    $result = mysqli_query($conn,$sql);
+    if (!($result)){
+        mysqli_close($conn);
+        exit("<script>alert('请勿重复上传')</script>");
+    }
+    $savePath = '../saveFiles/skins'; //线上为 '/server/skins'
+    $newName = upLoad($savePath);
+
+    $sql = "UPDATE mc_users SET skin_path = '$savePath' WHERE account = '$user'";
+    $result = mysqli_query($conn,$sql);
+    if(!($result)){
+        $sql = "UPDATE mc_users SET skin_path = 'NONE' WHERE account = '$user'";
+        mysqli_query($conn,$sql);
+        unlink($savePath.$newName.'.png');
+        mysqli_close($conn);
+        die("<script>alert('上传失败 4');history.go(-1)</script>");
+    }
+    echo "<script>alert('上传成功');history.go(-1)</script>";
+    return true;
+}
+
+function upLoadCape($user) : bool
+{
+    global $conn;
+    $sql = "SELECT account = '$user' FROM mc_users WHERE mc_users.cape_path IS NULL";
+    $result = mysqli_query($conn,$sql);
+    if (!($result)){
+        mysqli_close($conn);
+        exit("<script>alert('请勿重复上传')</script>");
+    }
+    $savePath = '../saveFiles/capes'; //线上为 '/server/skins'
+    $newName = upLoad($savePath);
+
+    $sql = "UPDATE mc_users SET cape_path = '$savePath' WHERE account = '$user'";
+    $result = mysqli_query($conn,$sql);
+    if(!($result)){
+        $sql = "UPDATE mc_users SET cape_path = 'NONE' WHERE account = '$user'";
+        mysqli_query($conn,$sql);
+        unlink($savePath.$newName.'.png');
+        mysqli_close($conn);
+        die("<script>alert('上传失败 4');history.go(-1)</script>");
+    }
+    echo "<script>alert('上传成功');history.go(-1)</script>";
+    return true;
+}
+
 
 //验证合法
 $imgName = $_FILES['myFile']['name'];
@@ -26,74 +94,20 @@ $fileType = '';
 if ($typeCode != "13780"){
     exit("<script>alert('只能上传PNG格式的图片');history.go(-1)</script>");
 }
-if ($size > 4096) {
-    exit("<script>alert('文件不应大于4096字节');history.go(-1)</script>");
+if ($size > 20480) {
+    exit("<script>alert('文件不应大于20KB');history.go(-1)</script>");
 }
 
-//数据库验证
-//$conn = mysqli_connect("localhost","mu8th1shwn","Nfxk:v6_2Y753S:","mu8th1shwn");
-
-//session_start();
 require './conn_sql.php';
-global $conn;
-//登录及重复上传检查
 $user = $_SESSION [ 'user' ];
+$imgSize = getimagesize($tmp);
 
-$sql = "SELECT account = '$user' FROM mc_users WHERE state = true";
-$result = mysqli_query($conn,$sql);
-$result = mysqli_num_rows($result);
-if ($result > 0) {
-    mysqli_close($conn);
-    exit("<script>alert('请勿重复上传');history.go(-1)</script>");
+if (in_array("64",$imgSize)){
+    updateSkin($user);
 }
-
-//重名检测
-$filepath = '../saveFiles/'; //线上为 '/server/skins'
-$reName = $_POST['reNameFile'];
-$savePath = $filepath . $reName . '.png';
-
-if (file_exists($savePath)){
-    mysqli_close($conn);
-    exit("<script>alert('名称重复');history.go(-1)</script>");
+elseif (in_array("512",$imgSize)){
+    upLoadCape($user);
 }
-
-//上传
-if (!(move_uploaded_file($tmp, $filepath . $imgName))) {
-    header("HTTP/1.1 500 Internal Server Error");
-    header("status: 500 Internal Server Error");
-    mysqli_close($conn);
-    exit("<script>alert('上传失败 1');history.go(-1)</script>");
+else {
+    die("<script>alert('你要不看看你上传的是什么');history.go(-1)</script>");
 }
-
-//数据库操作
-$sql_update_true = "UPDATE mc_users SET state = true WHERE account = '$user'";
-$result = mysqli_query($conn,$sql_update_true);
-if(!($result)){
-    $sql_update_true = "UPDATE mc_users SET state = false WHERE account = '$user'";
-    $result = mysqli_query($conn,$sql_update_true);
-    mysqli_close($conn);
-    unlink($filepath.$imgName);
-    exit("<script>alert('上传失败 2');history.go(-1)</script>");
-}
-
-//重命名
-$imgName = rename( $filepath . $imgName,$filepath . $reName . ".png");
-if (!($imgName)) {
-    mysqli_close($conn);
-    exit("<script>alert('上传失败 3');history.go(-1)</script>");
-}
-
-//保存皮肤路径
-$sql_path = "UPDATE mc_users SET skin_path = '$savePath' WHERE account = '$user'";
-$result = mysqli_query($conn,$sql_path);
-if(!($result)){
-    $sql_path = "UPDATE mc_users SET skin_path = 'NONE' WHERE account = '$user'";
-    $result = mysqli_query($conn,$sql_path);
-    mysqli_close($conn);
-    unlink($filepath.$reName.'.png');
-    exit("<script>alert('上传失败 4');history.go(-1)</script>");
-}
-
-echo "<script>alert('上传成功');history.go(-1)</script>";
-
-mysqli_close($conn);

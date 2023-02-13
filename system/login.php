@@ -3,7 +3,6 @@
 header("content-type:text/html;charset=utf-8");
 
 //error_reporting(0);
-require_once "../public/record.php";
 require './conn_sql.php';
 global $conn;
 

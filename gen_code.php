@@ -1,4 +1,3 @@
-
 <?php
 
 function str_rand($length=32,$characters='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'): false|string
