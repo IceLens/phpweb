@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +10,54 @@
   <title>主页</title>
 </head>
 <body>
-
+<div>
+  <div class="top-bar">
+    <span class="welcome" id="wel">Welcome</span>
+    <span class="welcome" id="user_name"></span>
+    <div class="announce">
+      通知
+      <ul>
+        <li><p onclick="fadeInS('notice_1',10)">首页告知</p></li>
+        <li><p onclick="fadeInS('notice_2',10)">最新公告</p></li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-bar">
+    <div class="select">
+      <p>皮肤设置</p>
+    </div>
+    <div class="select">
+      <p>披风设置</p>
+    </div>
+    <div class="select">
+      <p>密码重置</p>
+    </div>
+  </div>
+  <div class="main">
+  </div>
+</div>
+<!--a href="/test.php?f=12345" target="iframe">test</a>
+<iframe name="iframe" style="display: none"></iframe-->
 </body>
+<script type="text/javascript">
+  //显示文件名
+  function chooseFiles() {
+    let file_btn = document.querySelector('.up_file');
+    let file_input = file_btn.querySelector('#file');
+    file_input.click();
+  }
+  function displayText() {
+    let fileName1 = document.getElementById('file').value;
+    document.getElementById('fileName').innerText = fileName1.substring(fileName1.lastIndexOf("\\"));
+  }
+
+  window.onload = function (){
+    if (getPar('user')===0){
+      document.getElementById('wel').innerText = '';
+      document.getElementById('user_name').innerText = '尚未登录';
+      return;
+    }
+    document.getElementById('user_name').innerText = getPar('user');
+  }
+</script>
 </html>

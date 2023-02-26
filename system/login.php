@@ -9,10 +9,6 @@ global $conn;
 $account = $_POST['account'];
 $password = $_POST['password'];
 
-//$conn = mysqli_connect("localhost","mu8th1shwn","Nfxk:v6_2Y753S:","mu8th1shwn");
-
-//session_start();
-
 if ($account === '' || $password === ''){
     mysqli_close($conn);
     $result = array("code"=>0);

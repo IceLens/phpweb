@@ -76,16 +76,17 @@ function checkStrong() {
 
 /**
  * 用于在界面显示当前用户名称
+ *
  * @param par
- * @returns {string}
+ * @returns {number|string}
  */
-//GET
+//GET User
 function getPar(par){
 
     const local_url = document.location.href;
     const get = local_url.indexOf(par + "=");
     if(get === -1){
-        return '尚未登录';
+        return 0;
     }
     let get_par = local_url.slice(par.length + get + 1);
 

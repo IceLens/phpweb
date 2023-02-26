@@ -15,7 +15,7 @@ if($account === "" || $password === ""){
 }
 require './conn_sql.php';
 global $conn;
-//$conn = new mysqli("localhost","mu8th1shwn","Nfxk:v6_2Y753S:","mu8th1shwn");
+
 /*
 $stmt = $conn->prepare("SELECT Invite_Code FROM qq_account_code WHERE QQ_Account = '$account'");
 $stmt->execute();

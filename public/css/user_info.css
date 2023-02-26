@@ -72,7 +72,7 @@ body {
         z-index: 999;
         height: 100%;
         width: 100%;
-        backdrop-filter: blur(6px);
+        backdrop-filter: blur(18px);
     }
     .notice {
         position: relative;
@@ -169,7 +169,7 @@ body {
         z-index: 999;
         height: 100%;
         width: 100%;
-        backdrop-filter: blur(6px);
+        backdrop-filter: blur(18px);
     }
     .notice {
         /*pointer-events: none;*/
