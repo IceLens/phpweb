@@ -24,35 +24,90 @@
   </div>
   <div class="left-bar">
     <div class="select">
-      <p>皮肤设置</p>
+      皮肤设置
     </div>
     <div class="select">
-      <p>披风设置</p>
+      披风设置
     </div>
     <div class="select">
-      <p>密码重置</p>
+      密码重置
     </div>
   </div>
-  <div class="main">
+
+  <div class="main" id="setSkin">
+    <div class="operation-1">
+      <h2>上传皮肤</h2>
+      <form action="/system/upload.php?value=1" method="post" id="skins" enctype="multipart/form-data">
+        <p>请选择您的皮肤图片:</p>
+        <div id="select-skin" onclick="chooseSkins()">
+          <input type="button" class="btn" value="选择图像" >
+          <input type="file" id="skin" name="mySkin" onchange="displayText()">
+          <br>
+          <span id="skinName"></span>
+        </div>
+        <div class="confirm">
+          <label>
+            <input class="text-bar" type="text" name="reNameFile" required="required" placeholder="请输入您的Minecraft用户名">
+          </label>
+          <br>
+          <input class="btn" type="submit" value="上传文件">
+        </div>
+      </form>
+    </div>
+    <div class="operation-2">
+      <h2>重置皮肤</h2>
+      <form action="/system/reset_info.php?value=2" method="post" target="iframe" onsubmit="return confirm('确定要重置皮肤吗?')">
+        <input class="btn" type="submit" value="重置皮肤" id="reset_skin_btn" name="resetSkin">
+      </form>
+    </div>
   </div>
+
+  <div class="main" id="setCapes">
+    <div class="operation-1">
+      <h2>上传披风</h2>
+      <form action="/system/reset_info.php?value=3" method="post" id="capes" enctype="multipart/form-data">
+        <p>请选择您的披风图片:</p>
+        <div id="select-cape" onclick="chooseFiles()">
+          <input type="button" class="btn" value="选择图像" >
+          <input type="file" id="cape" name="mySkin" onchange="displayText()">
+          <br>
+          <span id="capeName"></span>
+        </div>
+        <div class="confirm">
+          <label>
+            <input class="text-bar" type="text" name="reNameFile" required="required" placeholder="请输入您的Minecraft用户名">
+          </label>
+          <br>
+          <input class="btn" type="submit" value="上传文件">
+        </div>
+      </form>
+    </div>
+    <div class="operation-2">
+      <h2>重置披风</h2>
+      <form action="/system/reset_info.php?value=4" method="post" target="iframe" onsubmit="return confirm('确定要重置披风吗?')">
+        <input class="btn" type="submit" value="重置披风" id="reset_cape_btn" name="resetSkin">
+      </form>
+    </div>
+  </div>
+
 </div>
 <!--a href="/test.php?f=12345" target="iframe">test</a>
 <iframe name="iframe" style="display: none"></iframe-->
 </body>
 <script type="text/javascript">
   //显示文件名
-  function chooseFiles() {
-    let file_btn = document.querySelector('.up_file');
-    let file_input = file_btn.querySelector('#file');
+  function chooseSkins() {
+    let file_btn = document.querySelector("#select-skin");
+    let file_input = file_btn.querySelector("#skin");
     file_input.click();
   }
   function displayText() {
-    let fileName1 = document.getElementById('file').value;
-    document.getElementById('fileName').innerText = fileName1.substring(fileName1.lastIndexOf("\\"));
+    let fileName1 = document.getElementById('skin').value;
+    document.getElementById('skinName').innerText = fileName1.substring(fileName1.lastIndexOf("\\"));
   }
 
   window.onload = function (){
-    if (getPar('user')===0){
+    if (getPar('user') === 0){
       document.getElementById('wel').innerText = '';
       document.getElementById('user_name').innerText = '尚未登录';
       return;

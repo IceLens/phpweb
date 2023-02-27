@@ -7,9 +7,40 @@ if (!(ifLogin())){
     exit("<script>alert('请登录在浏览哦');window.location='/public/web/login.html'</script>");
 }
 
-function upLoad($savePath) : string
+function checkThanUpload($tmp,$fileSize) : void
 {
-    global $tmp,$imgName;
+    //验证合法
+    $size = filesize($tmp);
+    $file = fopen($tmp, 'rb');
+    $bin  = fread($file, 2); //只读2字节
+
+    fclose($file);
+    $strInfo  = @unpack('C2chars', $bin);
+    $typeCode = intval($strInfo['chars1'].$strInfo['chars2']);
+
+    $fileType = '';
+
+    if ($typeCode != "13780"){
+        exit("<script>alert('只能上传PNG格式的图片');history.go(-1)</script>");
+    }
+    if ($size > $fileSize) {
+        exit("<script>alert('文件不应大于2048字节');history.go(-1)</script>");
+    }
+
+    $imgSize = getimagesize($tmp);
+    if (in_array("64",$imgSize)){
+        updateSkin();
+    }
+    elseif (in_array("512",$imgSize)) {
+        upLoadCape();
+    }
+    else {
+        die("<script>alert('你要不看看你上传的是什么');history.go(-1)</script>");
+    }
+}
+
+function upLoad($imgName,$tmp,$savePath) : string
+{
     $newName = $_POST['reNameFile'];
     $filePath = $savePath . $newName . '.png';
 
@@ -23,22 +54,29 @@ function upLoad($savePath) : string
     if (!($reName)) {
         die("<script>alert('上传失败 3');history.go(-1)</script>");
     }
-    return $newName;
+    return $savePath . $newName . ".png";
 }
 
-function updateSkin($user) : bool
+function updateSkin() : bool
 {
     global $conn;
-    $sql = "SELECT account = $user FROM mc_users WHERE skin_path IS NULL";
-    $result = mysqli_query($conn,$sql);
-    if (!($result)){
-        mysqli_close($conn);
-        exit("<script>alert('请勿重复上传')</script>");
-    }
-    $savePath = '../saveFiles/skins'; //线上为 '/server/skins'
-    $newName = upLoad($savePath);
+    $user = $_SESSION [ 'user' ];
+    $tmp = $_FILES['mySkin']['tmp_name'];
+    $imgName = $_FILES['mySkin']['name'];
 
-    $sql = "UPDATE mc_users SET skin_path = '$savePath' WHERE account = '$user'";
+    $sql = "SELECT account = '$user' FROM mc_users WHERE skin_path IS NOT NULL";
+    $result = mysqli_query($conn,$sql);
+    //$num = mysqli_num_rows($result);
+
+    if (mysqli_num_rows($result)==1){
+        mysqli_close($conn);
+        exit("<script>alert('请勿重复上传');history.go(-1)</script>");
+    }
+
+    $savePath = '../saveFiles/skins/'; //线上为 '/server/skins'
+    $newName = upLoad($imgName,$tmp,$savePath);
+
+    $sql = "UPDATE mc_users SET skin_path = '$newName' WHERE account = '$user'";
     $result = mysqli_query($conn,$sql);
     if(!($result)){
         $sql = "UPDATE mc_users SET skin_path = 'NONE' WHERE account = '$user'";
@@ -51,19 +89,24 @@ function updateSkin($user) : bool
     return true;
 }
 
-function upLoadCape($user) : bool
+
+function upLoadCape() : bool
 {
     global $conn;
-    $sql = "SELECT account = '$user' FROM mc_users WHERE mc_users.cape_path IS NULL";
+    $user = $_SESSION [ 'user' ];
+    $tmp = $_FILES['mySkin']['tmp_name'];
+    $imgName = $_FILES['mySkin']['name'];
+
+    $sql = "SELECT account = '$user' FROM mc_users WHERE mc_users.cape_path IS NOT NULL";
     $result = mysqli_query($conn,$sql);
-    if (!($result)){
+    if ($result){
         mysqli_close($conn);
-        exit("<script>alert('请勿重复上传')</script>");
+        exit("<script>alert('请勿重复上传');history.go(-1)</script>");
     }
     $savePath = '../saveFiles/capes'; //线上为 '/server/skins'
-    $newName = upLoad($savePath);
+    $newName = upLoad($imgName,$tmp,$savePath);
 
-    $sql = "UPDATE mc_users SET cape_path = '$savePath' WHERE account = '$user'";
+    $sql = "UPDATE mc_users SET cape_path = '$newName' WHERE account = '$user'";
     $result = mysqli_query($conn,$sql);
     if(!($result)){
         $sql = "UPDATE mc_users SET cape_path = 'NONE' WHERE account = '$user'";
@@ -76,38 +119,20 @@ function upLoadCape($user) : bool
     return true;
 }
 
-
-//验证合法
-$imgName = $_FILES['myFile']['name'];
-$tmp = $_FILES['myFile']['tmp_name'];
-
-$size = filesize($tmp);
-$file = fopen($tmp, 'rb');
-$bin  = fread($file, 2); //只读2字节
-
-fclose($file);
-$strInfo  = @unpack('C2chars', $bin);
-$typeCode = intval($strInfo['chars1'].$strInfo['chars2']);
-
-$fileType = '';
-
-if ($typeCode != "13780"){
-    exit("<script>alert('只能上传PNG格式的图片');history.go(-1)</script>");
-}
-if ($size > 20480) {
-    exit("<script>alert('文件不应大于20KB');history.go(-1)</script>");
-}
-
+$value = $_GET['value'];
 require './conn_sql.php';
-$user = $_SESSION [ 'user' ];
-$imgSize = getimagesize($tmp);
 
-if (in_array("64",$imgSize)){
-    updateSkin($user);
+if ($value == 1){
+    $tmp = $_FILES['mySkin']['tmp_name'];
+    checkThanUpload($tmp,2048);
 }
-elseif (in_array("512",$imgSize)){
-    upLoadCape($user);
+elseif ($value == 3){
+    $tmp = $_FILES['myCape']['tmp_name'];
+    checkThanUpload($tmp,20480);
 }
 else {
-    die("<script>alert('你要不看看你上传的是什么');history.go(-1)</script>");
+    header("HTTP/1.1 500 Internal Server Error");
+    header("status: 500 Internal Server Error");
+    exit("<script>alert('你要不看看你上传的是什么');history.go(-1)</script>");
 }
+

@@ -6,31 +6,33 @@ if (!(ifLogin())){
     exit("<script>alert('请登录在浏览哦');window.location='/public/web/login.html'</script>");
 }
 
-require './conn_sql.php';
-
 function resetSkin(): bool
 {
     global $conn;
     $user = $_SESSION [ 'user' ];
 
     //Path of skins
-    $sql_select = "SELECT skin_path FROM mc_users WHERE account = '$user'";
-    $result_1 = mysqli_query($conn,$sql_select);
+    $sql = "SELECT skin_path FROM mc_users WHERE account = '$user'";
+    $result_1 = mysqli_query($conn,$sql);
     $row = mysqli_fetch_assoc($result_1);
 
     if (!(file_exists($row['skin_path']))){
+        $sql = "UPDATE mc_users SET skin_path = null WHERE account = '$user'";
+        mysqli_query($conn,$sql);
         mysqli_close($conn);
         exit("<script>alert('找不到您的Minecraft皮肤');history.go(-1)</script>");
     }
 
-    unlink($row['skin_path']);
+    if (!(unlink($row['skin_path']))){
+        exit();
+    }
 
     //Update
-    $sql_update_path = "UPDATE mc_users SET skin_path = null WHERE account = '$user'";
-    $result_2 = mysqli_query($conn,$sql_update_path);
+    $sql = "UPDATE mc_users SET skin_path = null WHERE account = '$user'";
+    $result = mysqli_query($conn,$sql);
     mysqli_close($conn);
 
-    if (!($result_2)){
+    if (!($result)){
         die("<script>alert('修改失败');history.go(-1)</script>");
     }
     echo "<script>alert('修改成功');history.go(-1)</script>";
@@ -88,17 +90,17 @@ function resetCape(): bool
     return true;
 }
 
-//TODO 分辨类型
-if ($_POST['resetSkin'] == '重置皮肤'){
+$value = $_GET['value'];
+require './conn_sql.php';
+
+if ($value == 2){
     resetSkin();
 }
-elseif ($_POST['resetPassword'] !== '') {
-    resetPassword();
-}
-elseif ($_POST['resetCape'] == '重置披风'){
+elseif ($value == 4){
     resetCape();
 }
 else {
     header("HTTP/1.1 500 Internal Server Error");
     header("status: 500 Internal Server Error");
+    exit("<script>alert('Something wrong');history.go(-1)</script>");
 }

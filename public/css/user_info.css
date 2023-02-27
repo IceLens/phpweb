@@ -273,7 +273,7 @@ body {
 input[type=file] {
     display: none;
 }
-#fileName {
+#skinName {
     position: relative;
     left: 20px;
     top: 20px;
