@@ -4,7 +4,7 @@
 
 body {
     background-color: #DFEAF8FF;
-    /*overflow-x: hidden;*/
+    overflow-x: hidden;
 }
 
 .btn {
@@ -21,7 +21,6 @@ body {
     opacity: .8;
 }
 
-
 .top-bar {
     top: 0;
     left: 0;
@@ -34,7 +33,7 @@ body {
     top: 30px;
     position: relative;
     font-size: 25px;
-    left: 80%;
+    left: 75%;
 }
 .top-bar .announce {
     text-align: center;
@@ -143,8 +142,4 @@ input[type=file] {
     position: absolute;
     top: 120px;
     left: 165px;
-}
-
-#setCapes {
-    display: none;
 }

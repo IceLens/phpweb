@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../css/index.css">
   <script type="text/javascript" src="../js/function.js"></script>
   <link rel="shortcut icon" href="../img/ico.webp">
+  <style id="main-box-display">.main:not(#setCape){display: none;}</style>
   <title>主页</title>
 </head>
 <body>
@@ -23,21 +24,20 @@
     </div>
   </div>
   <div class="left-bar">
-    <div class="select">
+    <div class="select" onclick="switchPage(0)">
       皮肤设置
     </div>
-    <div class="select">
+    <div class="select" onclick="switchPage(1)">
       披风设置
     </div>
-    <div class="select">
+    <div class="select" onclick="switchPage(2)">
       密码重置
     </div>
   </div>
-
   <div class="main" id="setSkin">
     <div class="operation-1">
       <h2>上传皮肤</h2>
-      <form action="/system/upload.php?value=1" method="post" id="skins" enctype="multipart/form-data">
+      <form action="/system/upload.php?value=1" method="post" id="skins" enctype="multipart/form-data" target="iframe">
         <p>请选择您的皮肤图片:</p>
         <div id="select-skin" onclick="chooseSkins()">
           <input type="button" class="btn" value="选择图像" >
@@ -62,10 +62,10 @@
     </div>
   </div>
 
-  <div class="main" id="setCapes">
+  <div class="main" id="setCape">
     <div class="operation-1">
       <h2>上传披风</h2>
-      <form action="/system/reset_info.php?value=3" method="post" id="capes" enctype="multipart/form-data">
+      <form action="/system/reset_info.php?value=3" method="post" id="capes" enctype="multipart/form-data" target="iframe">
         <p>请选择您的披风图片:</p>
         <div id="select-cape" onclick="chooseFiles()">
           <input type="button" class="btn" value="选择图像" >
@@ -90,9 +90,19 @@
     </div>
   </div>
 
+  <div class="main" id="restPass">
+    <div class="operation-1">
+      <h2>重置密码</h2>
+      <form action="/system/reset_info.php" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong()">
+        <label for="password"></label><input type="password" name="resetPassword" id="password" placeholder="新密码" class="text-bar">
+        <input value="重置密码" class="btn" type="submit" id="reset_password_btn">
+      </form>
+    </div>
+  </div>
 </div>
-<!--a href="/test.php?f=12345" target="iframe">test</a>
-<iframe name="iframe" style="display: none"></iframe-->
+
+<iframe name="iframe" style="display: none"></iframe>
+
 </body>
 <script type="text/javascript">
   //显示文件名
@@ -104,6 +114,20 @@
   function displayText() {
     let fileName1 = document.getElementById('skin').value;
     document.getElementById('skinName').innerText = fileName1.substring(fileName1.lastIndexOf("\\"));
+  }
+
+  function switchPage(val) {
+    switch (val) {
+      case 0:
+        document.getElementById('main-box-display').innerText = '.main:not(#setSkin){display: none;}'
+        break;
+      case 1:
+        document.getElementById('main-box-display').innerText = '.main:not(#setCape){display: none;}'
+        break;
+      case 2:
+        document.getElementById('main-box-display').innerText = '.main:not(#restPass){display: none;}'
+        break;
+    }
   }
 
   window.onload = function (){

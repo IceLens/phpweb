@@ -9,6 +9,9 @@ if (!(ifLogin())){
 
 function checkThanUpload($tmp,$fileSize) : void
 {
+    if (!(is_file($tmp))){
+        exit("<script>alert('文件不能为空');history.go(-1)</script>");
+    }
     //验证合法
     $size = filesize($tmp);
     $file = fopen($tmp, 'rb');
@@ -66,14 +69,12 @@ function updateSkin() : bool
 
     $sql = "SELECT account = '$user' FROM mc_users WHERE skin_path IS NOT NULL";
     $result = mysqli_query($conn,$sql);
-    //$num = mysqli_num_rows($result);
-
     if (mysqli_num_rows($result)==1){
         mysqli_close($conn);
         exit("<script>alert('请勿重复上传');history.go(-1)</script>");
     }
 
-    $savePath = '../saveFiles/skins/'; //线上为 '/server/skins'
+    $savePath = '../saveFiles/skins/';
     $newName = upLoad($imgName,$tmp,$savePath);
 
     $sql = "UPDATE mc_users SET skin_path = '$newName' WHERE account = '$user'";
@@ -103,6 +104,7 @@ function upLoadCape() : bool
         mysqli_close($conn);
         exit("<script>alert('请勿重复上传');history.go(-1)</script>");
     }
+
     $savePath = '../saveFiles/capes'; //线上为 '/server/skins'
     $newName = upLoad($imgName,$tmp,$savePath);
 
