@@ -41,7 +41,7 @@ if (!(password_verify($passAndAccount,$row['password']))){
 $_SESSION['user']=$account;
 
 $data = array();
-$data["web"] = '/public/web/user_info.html?user=';
+$data["web"] = '/public/web/index.html?user=';
 $data["user"] = $account;
 $result = array("code"=>3,"data"=>$data);
 echo json_encode($result);

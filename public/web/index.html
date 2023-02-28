@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../css/index.css">
   <script type="text/javascript" src="../js/function.js"></script>
   <link rel="shortcut icon" href="../img/ico.webp">
-  <style id="main-box-display">.main:not(#setCape){display: none;}</style>
+  <style id="main-box-display">.main:not(#setSkin){display: none;}</style>
   <title>主页</title>
 </head>
 <body>
@@ -39,9 +39,9 @@
       <h2>上传皮肤</h2>
       <form action="/system/upload.php?value=1" method="post" id="skins" enctype="multipart/form-data" target="iframe">
         <p>请选择您的皮肤图片:</p>
-        <div id="select-skin" onclick="chooseSkins()">
+        <div id="select-skin" onclick='chooseFiles("#select-skin","#skin")'>
           <input type="button" class="btn" value="选择图像" >
-          <input type="file" id="skin" name="mySkin" onchange="displayText()">
+          <input type="file" id="skin" name="mySkin" oninput='displayText("skin","skinName")'>
           <br>
           <span id="skinName"></span>
         </div>
@@ -56,7 +56,7 @@
     </div>
     <div class="operation-2">
       <h2>重置皮肤</h2>
-      <form action="/system/reset_info.php?value=2" method="post" target="iframe" onsubmit="return confirm('确定要重置皮肤吗?')">
+      <form action="/system/reset_info.php?value=1" method="post" target="iframe" onsubmit="return confirm('确定要重置皮肤吗?')">
         <input class="btn" type="submit" value="重置皮肤" id="reset_skin_btn" name="resetSkin">
       </form>
     </div>
@@ -65,11 +65,11 @@
   <div class="main" id="setCape">
     <div class="operation-1">
       <h2>上传披风</h2>
-      <form action="/system/reset_info.php?value=3" method="post" id="capes" enctype="multipart/form-data" target="iframe">
+      <form action="/system/upload.php?value=2" method="post" id="capes" enctype="multipart/form-data" target="iframe">
         <p>请选择您的披风图片:</p>
-        <div id="select-cape" onclick="chooseFiles()">
+        <div id="select-cape" onclick='chooseFiles("#select-cape","#cape")'>
           <input type="button" class="btn" value="选择图像" >
-          <input type="file" id="cape" name="mySkin" onchange="displayText()">
+          <input type="file" id="cape" name="myCape" oninput='displayText("cape","capeName")'>
           <br>
           <span id="capeName"></span>
         </div>
@@ -84,7 +84,7 @@
     </div>
     <div class="operation-2">
       <h2>重置披风</h2>
-      <form action="/system/reset_info.php?value=4" method="post" target="iframe" onsubmit="return confirm('确定要重置披风吗?')">
+      <form action="/system/reset_info.php?value=2" method="post" target="iframe" onsubmit="return confirm('确定要重置披风吗?')">
         <input class="btn" type="submit" value="重置披风" id="reset_cape_btn" name="resetSkin">
       </form>
     </div>
@@ -93,8 +93,8 @@
   <div class="main" id="restPass">
     <div class="operation-1">
       <h2>重置密码</h2>
-      <form action="/system/reset_info.php" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong()">
-        <label for="password"></label><input type="password" name="resetPassword" id="password" placeholder="新密码" class="text-bar">
+      <form action="/system/reset_info.php?value=3" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong()">
+        <input type="password" name="resetPassword" id="password" placeholder="新密码" class="text-bar" required>
         <input value="重置密码" class="btn" type="submit" id="reset_password_btn">
       </form>
     </div>
@@ -106,14 +106,14 @@
 </body>
 <script type="text/javascript">
   //显示文件名
-  function chooseSkins() {
-    let file_btn = document.querySelector("#select-skin");
-    let file_input = file_btn.querySelector("#skin");
+  function chooseFiles(select,file) {
+    let file_btn = document.querySelector(select);
+    let file_input = file_btn.querySelector(file);
     file_input.click();
   }
-  function displayText() {
-    let fileName1 = document.getElementById('skin').value;
-    document.getElementById('skinName').innerText = fileName1.substring(fileName1.lastIndexOf("\\"));
+  function displayText(file,name) {
+    let fileName = document.getElementById(file).value;
+    document.getElementById(name).innerText = fileName.substring(fileName.lastIndexOf("\\"));
   }
 
   function switchPage(val) {

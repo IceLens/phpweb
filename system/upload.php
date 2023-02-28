@@ -7,7 +7,7 @@ if (!(ifLogin())){
     exit("<script>alert('请登录在浏览哦');window.location='/public/web/login.html'</script>");
 }
 
-function checkThanUpload($tmp,$fileSize) : void
+function checkThanUpload($tmp,$fileSize,$type) : void
 {
     if (!(is_file($tmp))){
         exit("<script>alert('文件不能为空');history.go(-1)</script>");
@@ -29,12 +29,18 @@ function checkThanUpload($tmp,$fileSize) : void
     if ($size > $fileSize) {
         exit("<script>alert('文件不应大于2048字节');history.go(-1)</script>");
     }
-
+/*
     $imgSize = getimagesize($tmp);
     if (in_array("64",$imgSize)){
         updateSkin();
     }
     elseif (in_array("512",$imgSize)) {
+        upLoadCape();
+    }*/
+    if ($type === 1){
+        uploadSkin();
+    }
+    elseif ($type === 2){
         upLoadCape();
     }
     else {
@@ -60,16 +66,21 @@ function upLoad($imgName,$tmp,$savePath) : string
     return $savePath . $newName . ".png";
 }
 
-function updateSkin() : bool
+function uploadSkin() : bool
 {
     global $conn;
     $user = $_SESSION [ 'user' ];
     $tmp = $_FILES['mySkin']['tmp_name'];
     $imgName = $_FILES['mySkin']['name'];
 
+     $imgSize = getimagesize($tmp);
+    if (!(in_array("64",$imgSize))){
+        exit("<script>alert('图片应为64*64');history.go(-1)</script>");
+    }
+
     $sql = "SELECT account = '$user' FROM mc_users WHERE skin_path IS NOT NULL";
     $result = mysqli_query($conn,$sql);
-    if (mysqli_num_rows($result)==1){
+    if (mysqli_num_rows($result)>0){
         mysqli_close($conn);
         exit("<script>alert('请勿重复上传');history.go(-1)</script>");
     }
@@ -80,7 +91,7 @@ function updateSkin() : bool
     $sql = "UPDATE mc_users SET skin_path = '$newName' WHERE account = '$user'";
     $result = mysqli_query($conn,$sql);
     if(!($result)){
-        $sql = "UPDATE mc_users SET skin_path = 'NONE' WHERE account = '$user'";
+        $sql = "UPDATE mc_users SET skin_path = null WHERE account = '$user'";
         mysqli_query($conn,$sql);
         unlink($savePath.$newName.'.png');
         mysqli_close($conn);
@@ -95,12 +106,17 @@ function upLoadCape() : bool
 {
     global $conn;
     $user = $_SESSION [ 'user' ];
-    $tmp = $_FILES['mySkin']['tmp_name'];
-    $imgName = $_FILES['mySkin']['name'];
+    $tmp = $_FILES['myCape']['tmp_name'];
+    $imgName = $_FILES['myCape']['name'];
+
+    $imgSize = getimagesize($tmp);
+    if (!(in_array("512",$imgSize))){
+        exit("<script>alert('图片因为512*');history.go(-1)</script>");
+    }
 
     $sql = "SELECT account = '$user' FROM mc_users WHERE mc_users.cape_path IS NOT NULL";
     $result = mysqli_query($conn,$sql);
-    if ($result){
+    if (mysqli_num_rows($result)>0){
         mysqli_close($conn);
         exit("<script>alert('请勿重复上传');history.go(-1)</script>");
     }
@@ -111,7 +127,7 @@ function upLoadCape() : bool
     $sql = "UPDATE mc_users SET cape_path = '$newName' WHERE account = '$user'";
     $result = mysqli_query($conn,$sql);
     if(!($result)){
-        $sql = "UPDATE mc_users SET cape_path = 'NONE' WHERE account = '$user'";
+        $sql = "UPDATE mc_users SET cape_path = null WHERE account = '$user'";
         mysqli_query($conn,$sql);
         unlink($savePath.$newName.'.png');
         mysqli_close($conn);
@@ -126,11 +142,11 @@ require './conn_sql.php';
 
 if ($value == 1){
     $tmp = $_FILES['mySkin']['tmp_name'];
-    checkThanUpload($tmp,2048);
+    checkThanUpload($tmp,2048,1);
 }
-elseif ($value == 3){
+elseif ($value == 2){
     $tmp = $_FILES['myCape']['tmp_name'];
-    checkThanUpload($tmp,20480);
+    checkThanUpload($tmp,20480,2);
 }
 else {
     header("HTTP/1.1 500 Internal Server Error");

@@ -93,11 +93,14 @@ function resetCape(): bool
 $value = $_GET['value'];
 require './conn_sql.php';
 
-if ($value == 2){
+if ($value == 1){
     resetSkin();
 }
-elseif ($value == 4){
+elseif ($value == 2){
     resetCape();
+}
+elseif ($value == 3){
+    resetPassword();
 }
 else {
     header("HTTP/1.1 500 Internal Server Error");
