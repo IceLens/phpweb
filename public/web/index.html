@@ -13,10 +13,11 @@
 <body>
 <div>
   <div class="top-bar">
+    <a href="login.html">登录</a>
     <span class="welcome" id="wel">Welcome</span>
     <span class="welcome" id="user_name"></span>
 
-    <div id="notice_1" class="notice-box">
+    <!--div id="notice_1" class="notice-box">
       <div class="notice">
         <span class="cancel-bar">.</span>
         <span class="cancel" onclick="fadeOutS('notice_1',15)">x</span>
@@ -33,7 +34,7 @@
           <p>服务器IP请向服竹询问</p>
         </div>
       </div>
-    </div>
+    </div-->
     <div class="announce">
       通知
       <ul>
@@ -112,8 +113,9 @@
   <div class="main" id="restPass">
     <div class="operation-1">
       <h2>重置密码</h2>
-      <form action="/system/reset_info.php?value=3" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong()">
-        <input type="password" name="resetPassword" id="password" placeholder="新密码" class="text-bar" required>
+      <form action="/system/reset_info.php?value=3" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong(1)">
+        <label for="password"></label><input type="password" name="resetPassword" id="password" placeholder="新密码" class="text-bar" required>
+        <br><br>
         <input value="重置密码" class="btn" type="submit" id="reset_password_btn">
       </form>
     </div>
@@ -157,5 +159,6 @@
     }
     document.getElementById('user_name').innerText = getPar('user');
   }
+
 </script>
 </html>

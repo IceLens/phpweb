@@ -60,16 +60,19 @@ function checkRegPassword() {
 }
 
 //密码强度
-function checkStrong() {
+function checkStrong(val) {
     const password = document.getElementById("password").value;
     let pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}|:"<>?,./;'`~\[\]\\])[A-Za-z\d!@#$%^&*()_+\-={}|:"<>?,./;`~'\[\]\\]{6,20}$/;
      if (pattern.test(password)){
          return true
      }
+     if (val === 1) {
+         alert('密码强度较低');
+         return false
+     }
      else {
-         document.getElementById('alert').style.display='block';
+         document.getElementById('alert').style.display='inline-block';
          document.getElementById('alert').value='密码强度较低';
-         //alert("密码强度较低");
          return false
      }
 }

@@ -129,6 +129,9 @@ body {
     height: 40px;
     font-size: 28px;
     margin: 10px 10px 60px;
+    border-width: 0 0 2px 0;
+    border-color: #a2a2a2;
+    border-style: solid;
 }
 .left-bar .select:hover {
     opacity: .7;
@@ -196,3 +199,4 @@ input[type=file] {
     top: 120px;
     left: 165px;
 }
+

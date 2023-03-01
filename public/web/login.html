@@ -17,15 +17,15 @@
             <div class="login-form">
                 <form method="post">
                 <div class="username form-item">
-                    <input id="alert" disabled class="input-item" value="">
+                    <label for="alert"></label><input id="alert" disabled class="input-item" value="">
                 </div>
                 <div class="username form-item">
                     <span>使用QQ帐号</span>
-                    <input id="account" name="account" type="text" class="input-item">
+                    <label for="account"></label><input id="account" name="account" type="text" class="input-item">
                 </div>
                 <div class="password form-item">
                     <span>密码</span>
-                    <input id="password" name="password" type="password" class="input-item">
+                    <label for="password"></label><input id="password" name="password" type="password" class="input-item">
                 </div>
                 <input type="button" class="login-btn" value="登 录" onclick="postInfo()">
                 </form>
@@ -75,7 +75,7 @@
                 style.value='账号或密码有误';
                 break;
             case 3 :
-            function jump(){window.location = result.data["web"] + result.data["user"]}
+            //function jump(){window.location = result.data["web"] + result.data["user"]}
 
                 style.style.color='#00FF44FF';
                 style.style.backgroundColor='rgba(0, 255, 68, 0.4)';
@@ -83,7 +83,9 @@
                 style.style.display='block';
                 style.value='登录成功';
 
-                setTimeout(jump,800);
+                setTimeout(function (){
+                    window.location = result.data["web"] + result.data["user"]
+                },800);
                 break;
             default :
                 alert('Unknown Error')

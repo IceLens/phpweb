@@ -59,7 +59,9 @@ function resetPassword(): bool
     if ((!$result)){
         die("<script>alert('修改失败');</script>");
     }
-    echo "<script>alert('修改成功');</script>";
+
+    echo json_encode(array("code"=>1));
+    echo "<script>alert('修改成功')</script>";
     return true;
 }
 
