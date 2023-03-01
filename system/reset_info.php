@@ -20,7 +20,7 @@ function resetSkin(): bool
         $sql = "UPDATE mc_users SET skin_path = null WHERE account = '$user'";
         mysqli_query($conn,$sql);
         mysqli_close($conn);
-        exit("<script>alert('找不到您的Minecraft皮肤');history.go(-1)</script>");
+        exit("<script>alert('找不到您的Minecraft皮肤');</script>");
     }
 
     if (!(unlink($row['skin_path']))){
@@ -33,9 +33,9 @@ function resetSkin(): bool
     mysqli_close($conn);
 
     if (!($result)){
-        die("<script>alert('修改失败');history.go(-1)</script>");
+        die("<script>alert('修改失败');</script>");
     }
-    echo "<script>alert('修改成功');history.go(-1)</script>";
+    echo "<script>alert('修改成功');</script>";
     return true;
 }
 
@@ -47,7 +47,7 @@ function resetPassword(): bool
 
     if ($newPassword === ''){
         mysqli_close($conn);
-        exit("<script>alert('新密码不应为空');history.go(-1)</script>");
+        exit("<script>alert('新密码不应为空');</script>");
     }
     $passAndAccount = $user .$newPassword;
 
@@ -57,9 +57,9 @@ function resetPassword(): bool
     mysqli_close($conn);
 
     if ((!$result)){
-        die("<script>alert('修改失败');history.go(-1)</script>");
+        die("<script>alert('修改失败');</script>");
     }
-    echo "<script>alert('修改成功');history.go(-1)</script>";
+    echo "<script>alert('修改成功');</script>";
     return true;
 }
 
@@ -74,7 +74,7 @@ function resetCape(): bool
 
     if (!(file_exists($row['cape_path']))){
         mysqli_close($conn);
-        exit("<script>alert('找不到您的Minecraft披风');history.go(-1)</script>");
+        exit("<script>alert('找不到您的Minecraft披风');</script>");
     }
 
     unlink($row['cape_path']);
@@ -84,9 +84,9 @@ function resetCape(): bool
     mysqli_close($conn);
 
     if (!($result_2)){
-        die("<script>alert('修改失败');history.go(-1)</script>");
+        die("<script>alert('修改失败');</script>");
     }
-    echo "<script>alert('修改成功');history.go(-1)</script>";
+    echo "<script>alert('修改成功');</script>";
     return true;
 }
 
@@ -105,5 +105,5 @@ elseif ($value == 3){
 else {
     header("HTTP/1.1 500 Internal Server Error");
     header("status: 500 Internal Server Error");
-    exit("<script>alert('Something wrong');history.go(-1)</script>");
+    exit("<script>alert('Something wrong');</script>");
 }

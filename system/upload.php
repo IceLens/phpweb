@@ -10,7 +10,7 @@ if (!(ifLogin())){
 function checkThanUpload($tmp,$fileSize,$type) : void
 {
     if (!(is_file($tmp))){
-        exit("<script>alert('文件不能为空');history.go(-1)</script>");
+        exit("<script>alert('文件不能为空');</script>");
     }
     //验证合法
     $size = filesize($tmp);
@@ -24,10 +24,10 @@ function checkThanUpload($tmp,$fileSize,$type) : void
     $fileType = '';
 
     if ($typeCode != "13780"){
-        exit("<script>alert('只能上传PNG格式的图片');history.go(-1)</script>");
+        exit("<script>alert('只能上传PNG格式的图片');</script>");
     }
     if ($size > $fileSize) {
-        exit("<script>alert('文件不应大于2048字节');history.go(-1)</script>");
+        exit("<script>alert('文件不应大于2048字节');</script>");
     }
 /*
     $imgSize = getimagesize($tmp);
@@ -44,7 +44,7 @@ function checkThanUpload($tmp,$fileSize,$type) : void
         upLoadCape();
     }
     else {
-        die("<script>alert('你要不看看你上传的是什么');history.go(-1)</script>");
+        die("<script>alert('你要不看看你上传的是什么');</script>");
     }
 }
 
@@ -54,14 +54,14 @@ function upLoad($imgName,$tmp,$savePath) : string
     $filePath = $savePath . $newName . '.png';
 
     if (file_exists($filePath)){
-        die("<script>alert('名称重复');history.go(-1)</script>");
+        die("<script>alert('名称重复');</script>");
     }
     if (!(move_uploaded_file($tmp, $savePath . $imgName))) {
-        die("<script>alert('上传失败 1');history.go(-1)</script>");
+        die("<script>alert('上传失败 1');</script>");
     }
     $reName = rename( $savePath . $imgName,$savePath . $newName . ".png");
     if (!($reName)) {
-        die("<script>alert('上传失败 3');history.go(-1)</script>");
+        die("<script>alert('上传失败 3');</script>");
     }
     return $savePath . $newName . ".png";
 }
@@ -75,14 +75,14 @@ function uploadSkin() : bool
 
      $imgSize = getimagesize($tmp);
     if (!(in_array("64",$imgSize))){
-        exit("<script>alert('图片应为64*64');history.go(-1)</script>");
+        exit("<script>alert('图片应为64*64像素');</script>");
     }
 
     $sql = "SELECT account = '$user' FROM mc_users WHERE skin_path IS NOT NULL";
     $result = mysqli_query($conn,$sql);
     if (mysqli_num_rows($result)>0){
         mysqli_close($conn);
-        exit("<script>alert('请勿重复上传');history.go(-1)</script>");
+        exit("<script>alert('请勿重复上传');</script>");
     }
 
     $savePath = '../saveFiles/skins/';
@@ -95,9 +95,9 @@ function uploadSkin() : bool
         mysqli_query($conn,$sql);
         unlink($savePath.$newName.'.png');
         mysqli_close($conn);
-        die("<script>alert('上传失败 4');history.go(-1)</script>");
+        die("<script>alert('上传失败 4');</script>");
     }
-    echo "<script>alert('上传成功');history.go(-1)</script>";
+    echo "<script>alert('上传成功');p</script>";
     return true;
 }
 
@@ -111,14 +111,14 @@ function upLoadCape() : bool
 
     $imgSize = getimagesize($tmp);
     if (!(in_array("512",$imgSize))){
-        exit("<script>alert('图片因为512*');history.go(-1)</script>");
+        exit("<script>alert('图片因为512*256像素');p</script>");
     }
 
     $sql = "SELECT account = '$user' FROM mc_users WHERE mc_users.cape_path IS NOT NULL";
     $result = mysqli_query($conn,$sql);
     if (mysqli_num_rows($result)>0){
         mysqli_close($conn);
-        exit("<script>alert('请勿重复上传');history.go(-1)</script>");
+        exit("<script>alert('请勿重复上传');p</script>");
     }
 
     $savePath = '../saveFiles/capes'; //线上为 '/server/skins'
@@ -131,9 +131,9 @@ function upLoadCape() : bool
         mysqli_query($conn,$sql);
         unlink($savePath.$newName.'.png');
         mysqli_close($conn);
-        die("<script>alert('上传失败 4');history.go(-1)</script>");
+        die("<script>alert('上传失败 4');p</script>");
     }
-    echo "<script>alert('上传成功');history.go(-1)</script>";
+    echo "<script>alert('上传成功');</script>";
     return true;
 }
 
@@ -151,6 +151,6 @@ elseif ($value == 2){
 else {
     header("HTTP/1.1 500 Internal Server Error");
     header("status: 500 Internal Server Error");
-    exit("<script>alert('你要不看看你上传的是什么');history.go(-1)</script>");
+    exit("<script>alert('你要不看看你上传的是什么');</script>");
 }
 

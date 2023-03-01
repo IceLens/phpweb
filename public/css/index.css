@@ -63,6 +63,59 @@ body {
     opacity: 1;
 }
 
+.notice-box {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(18px);
+}
+.notice {
+    position: relative;
+    width: 500px;
+    height: 300px;
+    left: 585px;
+    top: 300px;
+    background-color: #ffffff;
+    box-shadow: #a2a2a2 1px 1px 4px;
+    border-radius: 6px;
+    text-align: center;
+}
+.notice .scroll-bar {
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    overflow-y: scroll;
+    width: 480px;
+    height: 210px;
+}
+.notice .cancel-bar {
+    display: inline-block;
+    width: 100%;
+    background-color: #e5e5e5;
+    border-radius: 4px 4px 0 0;
+    color: #e5e5e5;
+}
+.notice .cancel {
+    display: inline-block;
+    position: absolute;
+    left: 96%;
+    width: 4%;
+    background-color: #b4b4b4;
+    color: #ec1700;
+    border-radius: 0 4px 0 0;
+}
+.notice .cancel {
+    cursor: pointer;
+}
+
+#notice_1 {
+    display: inline-block;
+}
+
 .left-bar {
     left: 0;
     top: 100px;

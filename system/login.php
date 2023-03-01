@@ -41,7 +41,7 @@ if (!(password_verify($passAndAccount,$row['password']))){
 $_SESSION['user']=$account;
 
 $data = array();
-$data["web"] = '/public/web/index.html?user=';
+$data["web"] = './index.html?user=';//Website_for_Minecraft_Server/public/web/index.html
 $data["user"] = $account;
 $result = array("code"=>3,"data"=>$data);
 echo json_encode($result);
