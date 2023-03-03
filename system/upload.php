@@ -15,13 +15,11 @@ function checkThanUpload($tmp,$fileSize,$type) : void
     //验证合法
     $size = filesize($tmp);
     $file = fopen($tmp, 'rb');
-    $bin  = fread($file, 2); //只读2字节
+    $bin  = fread($file, 2);//只读2字节
 
     fclose($file);
     $strInfo  = @unpack('C2chars', $bin);
     $typeCode = intval($strInfo['chars1'].$strInfo['chars2']);
-
-    $fileType = '';
 
     if ($typeCode != "13780"){
         exit("<script>alert('只能上传PNG格式的图片');</script>");
@@ -29,14 +27,6 @@ function checkThanUpload($tmp,$fileSize,$type) : void
     if ($size > $fileSize) {
         exit("<script>alert('文件不应大于2048字节');</script>");
     }
-/*
-    $imgSize = getimagesize($tmp);
-    if (in_array("64",$imgSize)){
-        updateSkin();
-    }
-    elseif (in_array("512",$imgSize)) {
-        upLoadCape();
-    }*/
     if ($type === 1){
         uploadSkin();
     }

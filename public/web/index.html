@@ -53,6 +53,12 @@
     <div class="select" onclick="switchPage(2)">
       密码重置
     </div>
+    <div class="select" onclick="switchPage(3)">
+      资源下载
+    </div>
+    <div class="select" onclick="switchPage(4)">
+      实用网站
+    </div>
   </div>
   <div class="main" id="setSkin">
     <div class="operation-1">
@@ -120,6 +126,18 @@
       </form>
     </div>
   </div>
+
+  <div class="main" id="download_box">
+    <iframe src="download.php"></iframe>
+  </div>
+
+  <div class="main" id="practical">
+    <button onclick="window.open('https://wiki.biligame.com/mc/%E6%95%99%E7%A8%8B')" class="btn">MC新手教程</button>
+    <button onclick="window.open('https://wiki.biligame.com/mc/Minecraft_Wiki')" class="btn">MC WiKi</button>
+    <button onclick="window.open('https://www.mcmod.cn')" class="btn">MCMOD</button>
+    <button onclick="window.open('https://www.curseforge.com/minecraft')" class="btn">Curseforge</button>
+  </div>
+
 </div>
 
 <iframe name="iframe" style="display: none"></iframe>
@@ -147,6 +165,12 @@
         break;
       case 2:
         document.getElementById('main-box-display').innerText = '.main:not(#restPass){display: none;}'
+        break;
+      case 3:
+        document.getElementById('main-box-display').innerText = '.main:not(#download_box){display: none;}'
+        break;
+      case 4:
+        document.getElementById('main-box-display').innerText = '.main:not(#practical){display: none;}'
         break;
     }
   }

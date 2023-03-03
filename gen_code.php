@@ -1,5 +1,5 @@
 <?php
-
+/*
 function str_rand($length=32,$characters='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'): false|string
 {
     if(!is_int($length)||$length<0){
@@ -16,4 +16,6 @@ function str_rand($length=32,$characters='0123456789abcdefghijklmnopqrstuvwxyzAB
 $random =  str_rand();
 print 'Random'."\r\n".$random;
 $code = password_hash($random,PASSWORD_BCRYPT);
-print 'Code'."\r\n".$code;
+print 'Code'."\r\n".$code;*/
+
+print password_hash('kQLsf3pxsuEdy2KpkER3RW67ZdGKpURc',PASSWORD_BCRYPT);

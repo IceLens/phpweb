@@ -126,16 +126,36 @@ body {
 }
 .left-bar .select {
     text-align: center;
-    height: 40px;
+    height: 45px;
     font-size: 28px;
-    margin: 10px 10px 60px;
+    margin: 15px 10px 60px;
     border-width: 0 0 2px 0;
     border-color: #a2a2a2;
     border-style: solid;
+    transition:0.5s;
+    -moz-transition:0.5s;
+    -webkit-transition:0.5s;
+    -o-transition:0.5s;
+}
+
+.left-bar .select:before {
+    width: 105px;
+    height: 0;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.5s ease 0s;
+    z-index: -1;
+}
+.left-bar .select:hover:after {
+    height: 100%;
+    border-radius: 10px;
 }
 .left-bar .select:hover {
-    opacity: .7;
+    opacity: .6;
     cursor: pointer;
+    transform: translateY(-8px) translateX(0px);
 }
 
 .main {
@@ -145,6 +165,7 @@ body {
     border-color: black;
     border-width: 1px;
     border-style: solid;
+    border-radius: 10px;
     width: 80%;
     height: 700px;
 }
@@ -152,6 +173,7 @@ body {
     position: absolute;
     background-color: #c8d9f1;
     border-radius: 6px;
+    box-shadow: #c4dffd 2px 2px 6px;
     height: 550px;
     width: 400px;
     top: 80px;
@@ -189,6 +211,7 @@ input[type=file] {
     position: absolute;
     background-color: #c8d9f1;
     border-radius: 6px;
+    box-shadow: #c4dffd 2px 2px 6px;
     height: 550px;
     width: 400px;
     top: 80px;
@@ -199,4 +222,28 @@ input[type=file] {
     top: 120px;
     left: 165px;
 }
+#password {
+    border-radius: 4px;
+    border-width: 1px;
+}
+
+#download_box iframe {
+    border-width: 1px;
+    border-radius: 6px;
+    box-shadow: #a2a2a2 1px 1px 6px;
+    position: relative;
+    width: 80%;
+    height: 75%;
+    top: 90px;
+    left: 125px;
+    
+}
+
+#practical .btn{
+    margin: 20px;
+    position: relative;
+    width: 120px;
+    height: 40px;
+}
+
 

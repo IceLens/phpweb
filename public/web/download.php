@@ -23,7 +23,7 @@ if (!(ifLogin())){
             test
         </button>
     </div>
-    <div class="box">
+    <!--div class="box">
         <p>服务器用客户端</p>
         <button class="down_button" value="mods" onclick="downloadFileTwo()">
             mods
@@ -34,7 +34,7 @@ if (!(ifLogin())){
         <button class="down_button">
             <a href="/saveFiles/skins/test.png" download="client.zip">Client-1.2</a>
         </button>
-    </div>
+    </div-->
     <div class="box">
         <p>整合包</p>
         <button class="down_button">
