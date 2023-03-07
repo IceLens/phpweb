@@ -1,11 +1,3 @@
-<!--?php
-require_once '../function.php';
-require_once "../record.php";
-
-if (!(ifLogin())){
-    exit("<script>//alert('请登录在浏览哦');window.location='public/web/login.html'</script>");
-}
-?-->
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -13,6 +5,7 @@ if (!(ifLogin())){
     <title>Download</title>
     <link rel="stylesheet" type="text/css" href="../css/down.css">
     <link rel="shortcut icon" href="../img/ico.webp">
+    <style id="display">body{display: none;}</style>
 </head>
 <body>
 <div id="main-box">
@@ -38,7 +31,7 @@ if (!(ifLogin())){
     <div class="box">
         <p>整合包</p>
         <button class="down_button">
-            Lightmod_pre2
+            LightMod_pre2
         </button>
     </div>
     <div id="footer">
@@ -61,3 +54,11 @@ if (!(ifLogin())){
     }
 </script>
 </html>
+<?php
+require_once '../function.php';
+
+if (ifLogin()){
+    exit("<script>document.getElementById('display').innerText = 'body{display: inline-block;}'</script>");
+}
+echo "<script>document.getElementById('display').innerText = 'body{display: none;}'</script>";
+?>

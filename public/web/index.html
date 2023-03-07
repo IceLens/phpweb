@@ -8,6 +8,7 @@
   <script type="text/javascript" src="../js/function.js"></script>
   <link rel="shortcut icon" href="../img/ico.webp">
   <style id="main-box-display">.main:not(#setSkin){display: none;}</style>
+  <！--link rel="stylesheet" href="../css/animate.css"-->
   <title>主页</title>
 </head>
 <body>
@@ -155,22 +156,23 @@
     document.getElementById(name).innerText = fileName.substring(fileName.lastIndexOf("\\"));
   }
 
-  function switchPage(val) {
+  function switchPage(val,element) {
+    let ele = document.getElementById('main-box-display');
     switch (val) {
       case 0:
-        document.getElementById('main-box-display').innerText = '.main:not(#setSkin){display: none;}'
+        ele.innerText = '.main:not(#setSkin){display: none;}';
         break;
       case 1:
-        document.getElementById('main-box-display').innerText = '.main:not(#setCape){display: none;}'
+        ele.innerText = '.main:not(#setCape){display: none;}';
         break;
       case 2:
-        document.getElementById('main-box-display').innerText = '.main:not(#restPass){display: none;}'
+        ele.innerText = '.main:not(#restPass){display: none;}';
         break;
       case 3:
-        document.getElementById('main-box-display').innerText = '.main:not(#download_box){display: none;}'
+        ele.innerText = '.main:not(#download_box){display: none;}';
         break;
       case 4:
-        document.getElementById('main-box-display').innerText = '.main:not(#practical){display: none;}'
+        ele.innerText = '.main:not(#practical){display: none;}';
         break;
     }
   }
