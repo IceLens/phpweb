@@ -47,6 +47,7 @@
         let account = document.getElementById('account').value;
         let password = document.getElementById('password').value;
         let xhr = new XMLHttpRequest();
+
         xhr.onreadystatechange = function () {
             if (!(xhr.readyState === 4)) {
                 return;
@@ -54,7 +55,8 @@
             let result = JSON.parse(this.responseText);
             callBackCodeLogin(result);
         }
-        xhr.open("post", '/system/login.php', true);
+
+        xhr.open("post", '/system/users/login.php', true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send("account="+ account + "&password="+ password);
     }

@@ -13,15 +13,9 @@ if($account === "" || $password === ""){
     $result = array("code"=>0);
     exit(json_encode($result));
 }
-require './conn_sql.php';
+require '../conn_sql.php';
 global $conn;
 
-/*
-$stmt = $conn->prepare("SELECT Invite_Code FROM qq_account_code WHERE QQ_Account = '$account'");
-$stmt->execute();
-$result = $stmt->get_result();
-$row = mysqli_fetch_assoc($result);
-*/
 $sql = "SELECT Invite_Code FROM qq_account_code WHERE QQ_Account = '$account'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
@@ -50,6 +44,7 @@ $passHash = password_hash($passAndAccount,PASSWORD_BCRYPT);
 $sql="INSERT INTO mc_users(account, password, skin_path, cape_path) VALUES ('$account','$passHash',null,null)";
 $result = mysqli_query($conn,$sql);
 if(!($result)){
+    mysqli_close($conn);
     $result = array("code"=>3);
     exit(json_encode($result));
 }

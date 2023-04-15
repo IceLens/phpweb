@@ -55,7 +55,7 @@
 </script>
 </html>
 <?php
-require_once '../function.php';
+require_once 'system/info/check_login.php';
 
 if (ifLogin()){
     exit("<script>document.getElementById('display').innerText = 'body{display: inline-block;}'</script>");

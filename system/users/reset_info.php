@@ -1,9 +1,10 @@
 <?php
 
 //error_reporting(0);
-require_once '../public/function.php';
-if (!(ifLogin())){
-    exit("<script>alert('请登录在浏览哦');window.location='/public/web/login.html'</script>");
+require '../info/tips.php';
+require_once '../info/check_login.php';
+if (ifLogin()){
+    exit(str_replace('word',tips(0),"<script>alert('word');window.location='/public/web/login.html'</script>"));
 }
 
 function resetSkin(): bool
@@ -13,18 +14,19 @@ function resetSkin(): bool
 
     //Path of skins
     $sql = "SELECT skin_path FROM mc_users WHERE account = '$user'";
-    $result_1 = mysqli_query($conn,$sql);
-    $row = mysqli_fetch_assoc($result_1);
+    $result = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($result);
 
-    if (!(file_exists($row['skin_path']))){
-        $sql = "UPDATE mc_users SET skin_path = null WHERE account = '$user'";
-        mysqli_query($conn,$sql);
-        mysqli_close($conn);
-        exit("<script>alert('找不到您的Minecraft皮肤');</script>");
+    try {
+        if (!(unlink($row['skin_path']))){
+            $sql = "UPDATE mc_users SET skin_path = null WHERE account = '$user'";
+            mysqli_query($conn,$sql);
+            mysqli_close($conn);
+            die("<script>alert('找不到您的Minecraft皮肤');</script>");
+        }
     }
-
-    if (!(unlink($row['skin_path']))){
-        exit();
+    catch (ArgumentCountError) {
+        die('err');
     }
 
     //Update
@@ -93,7 +95,7 @@ function resetCape(): bool
 }
 
 $value = $_GET['value'];
-require './conn_sql.php';
+require '../conn_sql.php';
 
 if ($value == 1){
     resetSkin();

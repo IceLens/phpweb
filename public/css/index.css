@@ -20,7 +20,7 @@ body {
 }
 .btn:hover {
     cursor: pointer;
-   /*opacity: .8;*/
+   opacity: .8;
     box-shadow: #8ab5ff 4px 3px 6px;
 }
 
@@ -31,6 +31,19 @@ body {
     height: 100px;
     width: 100%;
     background-color: white;
+}
+.top-bar #login {
+    position: relative;
+    top: 25px;
+    left: 8px;
+    text-decoration: none;
+    color: black;
+    width: 20px;
+    height: 10px;
+    transition: 0.2s;
+}
+.top-bar #login:hover {
+    opacity: 0.8;
 }
 .top-bar .welcome {
     top: 30px;
@@ -54,7 +67,7 @@ body {
     height: 0;
     overflow: hidden;
     background-color: #FFFFFF99;
-    transition:0.2s ease 0.1s;
+    transition:250ms ease 100ms;
     /*-moz-transition:0.2s ease 0.1s;
     -webkit-transition:0.2s ease 0.1s;
     -o-transition:0.2s ease 0.1s;*/
@@ -62,7 +75,6 @@ body {
 .top-bar .announce ul li {
     font-size: 18px;
     padding: 8px;
-
 }
 .top-bar .announce:hover ul {
     height: 320px;
@@ -153,9 +165,9 @@ body {
     cursor: pointer;
     box-shadow: #a2a2a2 0 5px 5px 0;
     border-radius: 8px;
-    border-color: rgba(81, 119, 182, 0.6);
+    border-color: #5177B6FF;
     border-bottom-width: 2px;
-    background-color: #92a6be;
+    background-color: #c5c5c5;
     /*transform: translateY(-2px) translateX(0px);*/
 }
 
@@ -229,16 +241,38 @@ input[type=file] {
     border-width: 1px;
 }
 
-#download_box iframe {
+#download_box #download_page {
     border-width: 1px;
     border-radius: 6px;
+    background-color: #e5e5e5;
     box-shadow: #a2a2a2 1px 1px 6px;
+    text-align: center;
     position: relative;
     width: 80%;
     height: 75%;
-    top: 90px;
+    top: 30px;
     left: 125px;
-    
+}
+#download_box #download_page .box {
+    width: 250px;
+    left: 50%;
+    margin: 60px auto;
+}
+#download_box #download_page .down_button {
+    left: 50%;
+    width: 120px;
+    height: 50px;
+    text-shadow: 1px 0 #8ab5ff ;
+    background-color: #d8e9fc;
+    border: 3px solid #8ab5ff;
+    border-radius: 6px;
+}
+#download_box #download_page p {
+    font-size: 20px;
+}
+#download_box #download_page .down_button:hover {
+    cursor: pointer;
+    opacity: .8;
 }
 
 #practical .btn{

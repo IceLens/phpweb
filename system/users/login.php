@@ -3,7 +3,7 @@
 header("content-type:text/html;charset=utf-8");
 
 //error_reporting(0);
-require './conn_sql.php';
+require '../conn_sql.php';
 global $conn;
 
 $account = $_POST['account'];
@@ -41,7 +41,7 @@ if (!(password_verify($passAndAccount,$row['password']))){
 $_SESSION['user']=$account;
 
 $data = array();
-$data["web"] = './index.html?user=';
+$data["web"] = '/Website_for_Minecraft_Server/index.html?user=';
 $data["user"] = $account;
 $result = array("code"=>3,"data"=>$data);
 echo json_encode($result);

@@ -55,6 +55,7 @@
         let password = document.getElementById('password').value;
         let inviteCode = document.getElementById('inviteCode').value;
         let xhr = new XMLHttpRequest();
+
         xhr.onreadystatechange = function () {
             if (!(xhr.readyState === 4)) {
                 return;
@@ -62,7 +63,8 @@
             let result = JSON.parse(this.responseText);
             callBackCodeReg(result);
         }
-        xhr.open("post", '/system/register.php', true);
+
+        xhr.open("post", '/system/users/register.php', true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send("account="+ account + "&password="+ password + "&code="+ inviteCode);
     }

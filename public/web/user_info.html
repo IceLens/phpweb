@@ -43,7 +43,7 @@
 <div class="box" id="user_info">
     <div class="box-two">
         <p>MCOfflineSkin仅支持PNG格式图像</p>
-        <form action="/system/upload.php" method="post" id="files" target="iframe" enctype="multipart/form-data">
+        <form action="/system/users/upload.php" method="post" id="files" target="iframe" enctype="multipart/form-data">
             <p>请选择您的皮肤图片：</p>
             <div class="up_file" onclick="chooseFiles()">
                 <span id="file_select" class="select">选择图像</span>
@@ -59,13 +59,13 @@
 <div class="box" id="reset">
     <div class="box-two">
         <p>重置用户信息</p>
-        <form action="/system/reset_info.php" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong()">
+        <form action="/system/users/reset_info.php" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong()">
             <input type="password" name="resetPassword" id="password" placeholder="新密码" class="text-bar">
             <input value="重置密码" class="btn" type="submit" id="reset_password_btn">
         </form>
     </div>
     <div class="box-two">
-        <form action="/system/reset_info.php" method="post" target="iframe" onsubmit="return confirm('确定要重置皮肤吗?')">
+        <form action="/system/users/reset_info.php" method="post" target="iframe" onsubmit="return confirm('确定要重置皮肤吗?')">
             <input class="btn" type="submit" value="重置皮肤" id="reset_skin_btn" name="resetSkin">
         </form>
     </div>

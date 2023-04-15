@@ -4,21 +4,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/index.css">
-  <script type="text/javascript" src="../js/function.js"></script>
-  <link rel="shortcut icon" href="../img/ico.webp">
+  <link rel="stylesheet" href="public/css/index.css">
+  <script type="text/javascript" src="public/js/function.js"></script>
+  <link rel="shortcut icon" href="public/img/ico.webp">
   <style id="main-box-display">.main:not(#setSkin){display: none;}</style>
-  <！--link rel="stylesheet" href="../css/animate.css"-->
   <title>主页</title>
 </head>
 <body>
 <div>
   <div class="top-bar">
-    <a href="login.html">登录</a>
+    <a id="login" href="public/web/login.html">登录</a>
     <span class="welcome" id="wel">Welcome</span>
     <span class="welcome" id="user_name"></span>
 
-    <!--div id="notice_1" class="notice-box">
+    <div id="notice_1" class="notice-box">
       <div class="notice">
         <span class="cancel-bar">.</span>
         <span class="cancel" onclick="fadeOutS('notice_1',15)">x</span>
@@ -35,7 +34,7 @@
           <p>服务器IP请向服竹询问</p>
         </div>
       </div>
-    </div-->
+    </div>
     <div class="announce">
       通知
       <ul>
@@ -64,7 +63,7 @@
   <div class="main" id="setSkin">
     <div class="operation-1">
       <h2>上传皮肤</h2>
-      <form action="/system/upload.php?value=1" method="post" id="skins" enctype="multipart/form-data" target="iframe">
+      <form action="/system/users/upload.php?value=1" method="post" id="skins" enctype="multipart/form-data" target="iframe">
         <p>请选择您的皮肤图片:</p>
         <div id="select-skin" onclick='chooseFiles("#select-skin","#skin")'>
           <input type="button" class="btn" value="选择图像" >
@@ -83,7 +82,7 @@
     </div>
     <div class="operation-2">
       <h2>重置皮肤</h2>
-      <form action="/system/reset_info.php?value=1" method="post" target="iframe" onsubmit="return confirm('确定要重置皮肤吗?')">
+      <form action="/system/users/reset_info.php?value=1" method="post" target="iframe" onsubmit="return confirm('确定要重置皮肤吗?')">
         <input class="btn" type="submit" value="重置皮肤" id="reset_skin_btn" name="resetSkin">
       </form>
     </div>
@@ -92,7 +91,7 @@
   <div class="main" id="setCape">
     <div class="operation-1">
       <h2>上传披风</h2>
-      <form action="/system/upload.php?value=2" method="post" id="capes" enctype="multipart/form-data" target="iframe">
+      <form action="/system/users/upload.php?value=2" method="post" id="capes" enctype="multipart/form-data" target="iframe">
         <p>请选择您的披风图片:</p>
         <div id="select-cape" onclick='chooseFiles("#select-cape","#cape")'>
           <input type="button" class="btn" value="选择图像" >
@@ -111,7 +110,7 @@
     </div>
     <div class="operation-2">
       <h2>重置披风</h2>
-      <form action="/system/reset_info.php?value=2" method="post" target="iframe" onsubmit="return confirm('确定要重置披风吗?')">
+      <form action="/system/users/reset_info.php?value=2" method="post" target="iframe" onsubmit="return confirm('确定要重置披风吗?')">
         <input class="btn" type="submit" value="重置披风" id="reset_cape_btn" name="resetSkin">
       </form>
     </div>
@@ -120,7 +119,7 @@
   <div class="main" id="restPass">
     <div class="operation-1">
       <h2>重置密码</h2>
-      <form action="/system/reset_info.php?value=3" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong(1)">
+      <form action="/system/users/reset_info.php?value=3" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong(1)">
         <label for="password"></label><input type="password" name="resetPassword" id="password" placeholder="新密码" class="text-bar" required>
         <br><br>
         <input value="重置密码" class="btn" type="submit" id="reset_password_btn">
@@ -129,7 +128,25 @@
   </div>
 
   <div class="main" id="download_box">
-    <iframe src="download.php"></iframe>
+    <!--iframe src="download.php"></iframe-->
+    <div id="download_page">
+
+      <div class="box">
+        <p>YXLumen's Mod pack</p>
+        <form action="/system/download.php?file=0" method="post" target="iframe">
+          <input class="down_button" value="test" type="submit">
+        </form>
+      </div>
+
+      <div class="box">
+        <p>客户端版本</p>
+        <form action="/system/download.php?file=1" method="post" target="iframe">
+          <input class="down_button" value="test" type="submit">
+        </form>
+      </div>
+
+    </div>
+
   </div>
 
   <div class="main" id="practical">
@@ -142,8 +159,8 @@
 </div>
 
 <iframe name="iframe" style="display: none"></iframe>
-
 </body>
+
 <script type="text/javascript">
   //显示文件名
   function chooseFiles(select,file) {
@@ -156,7 +173,7 @@
     document.getElementById(name).innerText = fileName.substring(fileName.lastIndexOf("\\"));
   }
 
-  function switchPage(val,element) {
+  function switchPage(val) {
     let ele = document.getElementById('main-box-display');
     switch (val) {
       case 0:

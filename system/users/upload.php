@@ -1,16 +1,17 @@
 <?php
 header("content-type:text/html;charset=utf-8");
 //error_reporting(0);
-require_once '../public/function.php';
+require_once '../info/check_login.php';
+require '../info/tips.php';
 
-if (!(ifLogin())){
-    exit("<script>alert('请登录在浏览哦');window.location='/public/web/login.html'</script>");
+if (ifLogin()){
+    exit(str_replace('word',tips(0),"<script>alert('word');window.location='/public/web/login.html'</script>"));
 }
 
 function checkThanUpload($tmp,$fileSize,$type) : void
 {
     if (!(is_file($tmp))){
-        exit("<script>alert('文件不能为空');</script>");
+        exit(str_replace('word',tips(1),"<script>alert('word')</script>"));
     }
     //验证合法
     $size = filesize($tmp);
@@ -25,7 +26,7 @@ function checkThanUpload($tmp,$fileSize,$type) : void
         exit("<script>alert('只能上传PNG格式的图片');</script>");
     }
     if ($size > $fileSize) {
-        exit("<script>alert('文件不应大于2048字节');</script>");
+        exit("<script>alert('文件不应大于.$fileSize.字节');</script>");
     }
     if ($type === 1){
         uploadSkin();
@@ -47,11 +48,11 @@ function upLoad($imgName,$tmp,$savePath) : string
         die("<script>alert('名称重复');</script>");
     }
     if (!(move_uploaded_file($tmp, $savePath . $imgName))) {
-        die("<script>alert('上传失败 1');</script>");
+        die(str_replace('word',tips(2),"<script>alert('word')</script>"));
     }
     $reName = rename( $savePath . $imgName,$savePath . $newName . ".png");
     if (!($reName)) {
-        die("<script>alert('上传失败 3');</script>");
+        die(str_replace('word',tips(2),"<script>alert('word')</script>"));
     }
     return $savePath . $newName . ".png";
 }
@@ -72,10 +73,10 @@ function uploadSkin() : bool
     $result = mysqli_query($conn,$sql);
     if (mysqli_num_rows($result)>0){
         mysqli_close($conn);
-        exit("<script>alert('请勿重复上传');</script>");
+        exit(str_replace('word',tips(3),"<script>alert('word')</script>"));
     }
 
-    $savePath = '../saveFiles/skins/';
+    $savePath = '../../saveFiles/skins/';
     $newName = upLoad($imgName,$tmp,$savePath);
 
     $sql = "UPDATE mc_users SET skin_path = '$newName' WHERE account = '$user'";
@@ -87,7 +88,7 @@ function uploadSkin() : bool
         mysqli_close($conn);
         die("<script>alert('上传失败 4');</script>");
     }
-    echo "<script>alert('上传成功');p</script>";
+    echo "<script>alert('上传成功');</script>";
     return true;
 }
 
@@ -111,7 +112,7 @@ function upLoadCape() : bool
         exit("<script>alert('请勿重复上传');p</script>");
     }
 
-    $savePath = '../saveFiles/capes'; //线上为 '/server/skins'
+    $savePath = '../../saveFiles/capes/'; //线上为 '/server/skins'
     $newName = upLoad($imgName,$tmp,$savePath);
 
     $sql = "UPDATE mc_users SET cape_path = '$newName' WHERE account = '$user'";
@@ -128,7 +129,7 @@ function upLoadCape() : bool
 }
 
 $value = $_GET['value'];
-require './conn_sql.php';
+require '../conn_sql.php';
 
 if ($value == 1){
     $tmp = $_FILES['mySkin']['tmp_name'];
