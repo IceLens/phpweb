@@ -20,12 +20,14 @@
                     <label for="alert"></label><input id="alert" disabled class="input-item" value="">
                 </div>
                 <div class="username form-item">
-                    <span>使用QQ帐号</span>
-                    <label for="account"></label><input id="account" name="account" type="text" class="input-item">
+                    <label for="account"><span id="tip_1">使用QQ帐号</span>
+                    <input id="account" name="account" type="text" class="input-item" onclick="highLight('tip_1')" onblur="deHighLight('tip_1')">
+                    </label>
                 </div>
                 <div class="password form-item">
-                    <span>密码</span>
-                    <label for="password"></label><input id="password" name="password" type="password" class="input-item">
+                    <label for="password"><span id="tip_2">密码</span>
+                    <input id="password" name="password" type="password" class="input-item" onclick="highLight('tip_2')" onblur="deHighLight('tip_2')">
+                    </label>
                 </div>
                 <input type="button" class="login-btn" value="登 录" onclick="postInfo()">
                 </form>

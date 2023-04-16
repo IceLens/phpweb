@@ -136,6 +136,14 @@ function fadeOutS(element,speed){
     }
 }
 
+function highLight(ele){
+    document.getElementById(ele).style.color = "rgb(255, 255, 255)";
+}
+function deHighLight(ele) {
+    document.getElementById(ele).style.color = ""
+}
+
+
 /**
  *
  * @param message
@@ -148,6 +156,3 @@ async function digestMessage(message) {
 
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');    // convert bytes to hex string
 }
-/*
-digestMessage(content2)
-    .then(Hex => console.log(Hex))*/

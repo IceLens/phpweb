@@ -19,20 +19,20 @@
                         <input id="alert" disabled class="input-item" value="">
                     </div>
                     <div class="username form-item">
-                        <span>使用QQ帐号</span>
-                        <input id="account" name="account" type="text" class="input-item" required="required">
+                        <label for="account"><span id="tip_1">使用QQ帐号</span></label>
+                        <input id="account" name="account" type="text" class="input-item" required="required" onclick="highLight('tip_1')" onblur="deHighLight('tip_1')">
                     </div>
                     <div class="password form-item">
-                        <span>密码</span>
-                        <input id="password" name="password" type="password" class="input-item">
+                        <label for="password"><span id="tip_2">密码</span></label>
+                        <input id="password" name="password" type="password" class="input-item" onclick="highLight('tip_2')" onblur="deHighLight('tip_2')">
                     </div>
                     <div class="password form-item">
-                        <span>密码</span>
-                        <input id="rePassword" type="password" class="input-item">
+                        <label for="rePassword"><span id="tip_3">密码</span></label>
+                        <input id="rePassword" type="password" class="input-item" onclick="highLight('tip_3')" onblur="deHighLight('tip_3')">
                     </div>
                     <div class="password form-item">
-                        <span>邀请码</span>
-                        <input id="inviteCode" name="inviteCode" type="password" class="input-item">
+                        <label for="inviteCode"><span id="tip_4">邀请码</span></label>
+                        <input id="inviteCode" name="inviteCode" type="password" class="input-item" onclick="highLight('tip_4')" onblur="deHighLight('tip_4')">
                     </div>
                     <input type="button" class="login-btn" value="注 册" onclick="postInfo()">
                 </form>

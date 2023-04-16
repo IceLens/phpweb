@@ -20,7 +20,7 @@ body {
 }
 .btn:hover {
     cursor: pointer;
-   opacity: .8;
+    opacity: .8;
     box-shadow: #8ab5ff 4px 3px 6px;
 }
 
@@ -42,9 +42,6 @@ body {
     height: 10px;
     transition: 0.2s;
 }
-.top-bar #login:hover {
-    opacity: 0.8;
-}
 .top-bar .welcome {
     top: 30px;
     position: relative;
@@ -54,37 +51,37 @@ body {
 .top-bar .announce {
     text-align: center;
     position: absolute;
-    left: 92%;
+    left: 91%;
     top: 30px;
     font-size: 25px;
     height: 90px;
-
+    width: 150px;
 }
 .top-bar .announce ul {
+
     border-radius: 8px;
     opacity: 0;
-    list-style: none;
     height: 0;
     overflow: hidden;
     background-color: #FFFFFF99;
-    transition:250ms ease 100ms;
-    /*-moz-transition:0.2s ease 0.1s;
-    -webkit-transition:0.2s ease 0.1s;
-    -o-transition:0.2s ease 0.1s;*/
-}
-.top-bar .announce ul li {
-    font-size: 18px;
-    padding: 8px;
+    transition: 250ms ease 100ms;
+    list-style: none;
 }
 .top-bar .announce:hover ul {
     height: 320px;
     margin-top: 50px;
     opacity: 1;
 }
-.top-bar .announce:hover:after {
-    opacity: 0;
+.top-bar .announce ul li {
+    font-size: 18px;
+    transition: 200ms;
+    padding: 15px;
 }
-
+.top-bar .announce ul li:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    transform: translateY(-5px);
+}
 .notice-box {
     display: none;
     position: fixed;
@@ -152,23 +149,19 @@ body {
     text-align: center;
     height: 45px;
     font-size: 28px;
-    margin: 15px 10px 60px;
+    margin: 15px 15px 60px;
     border-width: 0 0 2px 0;
     border-style: solid;
     border-color: #a2a2a2;
-    transition:0.5s;
-    /*-moz-transition:0.5s;
-    -webkit-transition:0.5s;
-    -o-transition:0.5s;*/
+    transition: 300ms;
 }
 .left-bar .select:hover {
     cursor: pointer;
     box-shadow: #a2a2a2 0 5px 5px 0;
-    border-radius: 8px;
     border-color: #5177B6FF;
     border-bottom-width: 2px;
     background-color: #c5c5c5;
-    /*transform: translateY(-2px) translateX(0px);*/
+    margin: 15px 0 60px;
 }
 
 .main {
@@ -179,12 +172,15 @@ body {
     border-width: 1px;
     border-style: solid;
     border-radius: 10px;
+    background: url("../img/Userinfo_background.jpg");
+    background-size: 100% 100%;
     width: 80%;
     height: 700px;
 }
 .main .operation-1 {
     position: absolute;
-    background-color: #c8d9f1;
+    background-color: rgba(196, 219, 255, 0.7);
+    backdrop-filter: blur(6px);
     border-radius: 6px;
     box-shadow: #92a6be 2px 2px 6px;
     height: 550px;
@@ -222,7 +218,8 @@ input[type=file] {
 .main .operation-2 {
     text-align: center;
     position: absolute;
-    background-color: #c8d9f1;
+    background-color: rgba(196, 219, 255, 0.7);
+    backdrop-filter: blur(6px);
     border-radius: 6px;
     box-shadow: #92a6be 2px 2px 6px;
     height: 550px;
