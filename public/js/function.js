@@ -60,15 +60,11 @@ function checkRegPassword() {
 }
 
 //密码强度
-function checkStrong(val) {
+function checkStrong() {
     const password = document.getElementById("password").value;
     let pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}|:"<>?,./;'`~\[\]\\])[A-Za-z\d!@#$%^&*()_+\-={}|:"<>?,./;`~'\[\]\\]{6,20}$/;
      if (pattern.test(password)){
          return true
-     }
-     if (val === 1) {
-         alert('密码强度较低');
-         return false
      }
      else {
          document.getElementById('alert').style.display='inline-block';
@@ -106,7 +102,7 @@ function getPar(par){
  * @param speed
  */
 //淡入淡出
-function fadeInS(element,speed){
+function fadeInS(element,speed=15){
     let ele = document.getElementById(element);
     if (ele.style.opacity !=='1'){
         ele.style.display='block';
@@ -121,7 +117,7 @@ function fadeInS(element,speed){
     }
 }
 
-function fadeOutS(element,speed){
+function fadeOutS(element,speed=15){
     let ele = document.getElementById(element);
     if (ele.style.opacity !=='0'){
         let num = 10;
@@ -156,3 +152,4 @@ async function digestMessage(message) {
 
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');    // convert bytes to hex string
 }
+

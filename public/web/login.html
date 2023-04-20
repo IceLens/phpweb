@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,7 +29,7 @@
                     <input id="password" name="password" type="password" class="input-item" onclick="highLight('tip_2')" onblur="deHighLight('tip_2')">
                     </label>
                 </div>
-                <input type="button" class="login-btn" value="登 录" onclick="postInfo()">
+                    <button type="button" class="login-btn" onclick="postInfo()">登 录</button>
                 </form>
             </div>
             <div class="divider">
@@ -79,8 +79,6 @@
                 style.value='账号或密码有误';
                 break;
             case 3 :
-            //function jump(){window.location = result.data["web"] + result.data["user"]}
-
                 style.style.color='#00FF44FF';
                 style.style.backgroundColor='rgba(0, 255, 68, 0.4)';
                 style.style.borderColor='#18c300';

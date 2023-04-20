@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="public/css/index.css">
+  <link rel="stylesheet" href="public/css/animation.css">
   <script type="text/javascript" src="public/js/function.js"></script>
   <link rel="shortcut icon" href="public/img/ico.webp">
   <style id="main-box-display">.main:not(#setSkin){display: none;}</style>
@@ -34,30 +35,40 @@
           <p>服务器IP请向服竹询问</p>
         </div>
       </div>
+    </div>
+    <div id="notice_3" class="notice-box">
+      <div class="notice">
+        <span class="cancel-bar">.</span>
+        <span class="cancel" onclick="fadeOutS('notice_3',15)">x</span>
+        <h2>联系我</h2>
+        <p>QQ:</p>
+      </div>
     </div-->
+
     <div class="announce">
       通知
       <ul>
         <li><p onclick="fadeInS('notice_1',10)">首页告知</p></li>
         <li><p onclick="fadeInS('notice_2',10)">最新公告</p></li>
+        <li><p onclick="fadeInS('notice_3',10)">最新公告</p></li>
       </ul>
     </div>
   </div>
   <div class="left-bar">
-    <div class="select" onclick="switchPage(0)">
-      皮肤设置
+    <div class="select ripple" onclick="switchPage(0)">
+      <p>皮肤设置</p>
     </div>
-    <div class="select" onclick="switchPage(1)">
-      披风设置
+    <div class="select ripple" onclick="switchPage(1)">
+      <p>披风设置</p>
     </div>
-    <div class="select" onclick="switchPage(2)">
-      密码重置
+    <div class="select ripple" onclick="switchPage(2)">
+      <p>密码重置</p>
     </div>
-    <div class="select" onclick="switchPage(3)">
-      资源下载
+    <div class="select ripple" onclick="switchPage(3)">
+      <p>资源下载</p>
     </div>
-    <div class="select" onclick="switchPage(4)">
-      实用网站
+    <div class="select ripple" onclick="switchPage(4)">
+      <p>实用网站</p>
     </div>
   </div>
   <div class="main" id="setSkin">
@@ -66,7 +77,7 @@
       <form action="/system/users/upload.php?value=1" method="post" id="skins" enctype="multipart/form-data" target="iframe">
         <p>请选择您的皮肤图片:</p>
         <div id="select-skin" onclick='chooseFiles("#select-skin","#skin")'>
-          <input type="button" class="btn" value="选择图像" >
+          <input type="button" class="btn" value="选择图像">
           <input type="file" id="skin" name="mySkin" oninput='displayText("skin","skinName")'>
           <br>
           <span id="skinName"></span>
@@ -94,7 +105,7 @@
       <form action="/system/users/upload.php?value=2" method="post" id="capes" enctype="multipart/form-data" target="iframe">
         <p>请选择您的披风图片:</p>
         <div id="select-cape" onclick='chooseFiles("#select-cape","#cape")'>
-          <input type="button" class="btn" value="选择图像" >
+          <input type="button" class="btn" value="选择图像">
           <input type="file" id="cape" name="myCape" oninput='displayText("cape","capeName")'>
           <br>
           <span id="capeName"></span>
@@ -119,7 +130,7 @@
   <div class="main" id="restPass">
     <div class="operation-1">
       <h2>重置密码</h2>
-      <form action="/system/users/reset_info.php?value=3" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong(1)">
+      <form action="/system/users/reset_info.php?value=3" method="post" target="iframe" onsubmit="return confirm('确定要重置密码吗?') && checkStrong()">
         <label for="password"></label><input type="password" name="resetPassword" id="password" placeholder="新密码" class="text-bar" required>
         <br><br>
         <input value="重置密码" class="btn" type="submit" id="reset_password_btn">
@@ -160,7 +171,7 @@
 
 <iframe name="iframe" style="display: none"></iframe>
 </body>
-
+<script type="text/javascript" src="public/js/animation.js"></script>
 <script type="text/javascript">
   //显示文件名
   function chooseFiles(select,file) {
@@ -174,22 +185,22 @@
   }
 
   function switchPage(val) {
-    let ele = document.getElementById('main-box-display');
+    let eleA = document.getElementById('main-box-display');
     switch (val) {
       case 0:
-        ele.innerText = '.main:not(#setSkin){display: none;}';
+        eleA.innerText = '.main:not(#setSkin){display: none;}';
         break;
       case 1:
-        ele.innerText = '.main:not(#setCape){display: none;}';
+        eleA.innerText = '.main:not(#setCape){display: none;}';
         break;
       case 2:
-        ele.innerText = '.main:not(#restPass){display: none;}';
+        eleA.innerText = '.main:not(#restPass){display: none;}';
         break;
       case 3:
-        ele.innerText = '.main:not(#download_box){display: none;}';
+        eleA.innerText = '.main:not(#download_box){display: none;}';
         break;
       case 4:
-        ele.innerText = '.main:not(#practical){display: none;}';
+        eleA.innerText = '.main:not(#practical){display: none;}';
         break;
     }
   }

@@ -117,10 +117,7 @@
     font-size: 18px;
     color: rgb(131, 176, 213);
     transition: 200ms;
-  }/*
-  .box .content .login-wrapper .login-form .form-item span:hover{
-    color: rgb(255, 255, 255);
-  }*/
+  }
   .box .content .login-wrapper .login-form .form-item .input-item {
     height: 60px;
     border: 1px solid rgb(214, 222, 228);
