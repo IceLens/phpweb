@@ -1,0 +1,162 @@
+
+body {
+    font-family: "Microsoft YaHei UI", serif;
+    color: #ffffff;
+    background-image: linear-gradient(to bottom, black, #0c0b1a);
+}
+
+.head {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 600px;
+    width: 100%;
+    background: url("../img/Star_1.png") no-repeat;
+    background-size: 100%;
+}
+.head span {
+    position: inherit;
+    display: flex;
+    cursor: pointer;
+
+    left: 92%;
+    width: 65px;
+    height: 30px;
+
+    border-style: solid;
+    border-radius: 6px;
+    border-width: 1px;
+
+    justify-content: center;
+    align-items: center;
+}
+.head span:hover {
+    opacity: 0.8;
+}
+.head h1 {
+    text-align: center;
+    font-size: 60px;
+    height: auto;
+}
+.head .box-1 {
+    position: relative;
+    display: inline-block;
+    top: 60px;
+    left: 100px;
+}
+
+.main {
+    position: relative;
+    height: 800px;
+}
+.main .box-1 {
+    position: relative;
+
+    display: inline-block;
+    top: 20px;
+    left: 100px;
+}
+.main .box-1 .card {
+    width: auto;
+    height: auto;
+    position: relative;
+}
+.main .box-1 .card:hover {
+    width: 1000px;
+}
+.main .box-1 .card .card-content {
+    width: 500px;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    inset: 1px;
+    border-radius: 10px;
+    background-color: #151515;
+    backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.4);
+    font-size: large;
+    transition: 150ms;
+
+    position: absolute;
+}
+.main .box-1 .card .card-content::before {
+    content: "";
+
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: absolute;
+}
+.main .box-1 .card:hover .card-content::before {
+    opacity: 1;
+}
+
+
+/*第一个*/
+.main .box-1 .card-1 .card-content {
+    transform-style: preserve-3d;
+}
+.main .box-1 .card-1 .card-content:nth-child(2) {
+    top: 280px;
+}
+.main .box-1 .card-1 .card-content:nth-child(3) {
+    left: 510px;
+    height: 550px;
+}
+.main .box-1 .card-1 .card-content::before {
+    background: radial-gradient(
+            250px circle at var(--mouse-x) var(--mouse-y),
+            rgba(70, 65, 115, 0.5),
+            transparent
+    );
+}
+
+/*第二个*/
+.main .box-1 .card-2 .card-content::before {
+    background: radial-gradient(
+            250px circle at var(--mouse-x) var(--mouse-y),
+            rgba(164, 34, 20, 0.3),
+            transparent
+    );
+}
+.main .box-1 .card-2 .card-content:nth-child(1) {
+    height: 550px;
+}
+.main .box-1 .card-2 .card-content:nth-child(2) {
+    left: 510px;
+    height: 550px;
+}
+
+.normal-text {
+    width: 800px;
+    height: 300px;
+
+    border-style: solid;
+    border-width: 1px 0 1px 0;
+    border-color: #736eab;
+
+    text-align: left;
+}
+
+
+#footer {
+    position: absolute;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    background-color: #1e1e1e;
+}
+#footer h4 {
+    position: inherit;
+    left: 10px;
+}
+#footer p {
+    top: 30px;
+    left: 10px;
+    position: absolute;
+}

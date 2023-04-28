@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/icon-Psi.webp">
+    <link rel="stylesheet" href="../css/psi.css">
+    <link rel="stylesheet" href="../css/animation.css">
+    <title>Psi</title>
+</head>
+<body>
+<div class="head">
+    <span class="ripple">Sign in</span>
+    <h1>Psi</h1>
+    <div class="box-1">
+        <h2>Let's begin from here</h2>
+        <p>应需而生  专业可靠</p>
+        <p>以神秘和不可思议的方式满足您的要求</p>
+    </div>
+</div>
+<div class="main">
+    <div class="box-1">
+        <h2>Get your want here</h2>
+        <div class="card-1 card">
+            <div class="card-content" onmousemove="rotate(this)" onmouseout="resetRotate(this)">
+                生活
+            </div>
+            <div class="card-content" onmousemove="rotate(this)" onmouseout="resetRotate(this)">
+                学习
+            </div>
+            <div class="card-content" onmousemove="rotate(this)" onmouseout="resetRotate(this)">
+                事业
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="box-1">
+        <h2>What we can do</h2>
+        <div class="card-2 card">
+            <div class="card-content" onmousemove="rotate(this,0,-12)" onmouseout="resetRotate(this)">
+                建议
+            </div>
+            <div class="card-content" onmousemove="rotate(this,0,-12)" onmouseout="resetRotate(this)">
+                信息
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="box-1">
+        <h2>Contact us</h2>
+        <div class="normal-text">
+            <h4>Phone:</h4>
+            <p>&emsp;114514&emsp;&emsp;86+ 31415926535(Mobile)</p>
+            <h4>E-Mail:</h4>
+            <p>&emsp;psi2023@psi.com</p>
+            <h4>Emergency services</h4>
+            <p>&emsp;10086</p>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <h4>Psi</h4>
+    <p>All Right Belong</p>
+</div>
+</body>
+<script type="text/javascript" src="../js/animation.js"></script>
+<script type="text/javascript">
+    alert('此网页仅用于展示,与主站服务无关')
+    const eleRipple = document.getElementsByClassName('ripple');
+
+    for (i= 0; i<eleRipple.length; i++){
+        ripple(eleRipple[i],10)
+    }
+    document.querySelector(".card-1").onmousemove = (e) => {
+        move(e);
+    };
+    document.querySelector(".card-2").onmousemove = (e) => {
+        move(e);
+    };
+    function resetRotate(ele) {
+        ele.style.transform = "rotateX(0Deg) rotateY(0Deg)"
+    }
+</script>
+</html>

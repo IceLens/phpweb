@@ -60,16 +60,20 @@ function checkRegPassword() {
 }
 
 //密码强度
-function checkStrong() {
+function checkStrong(val) {
     const password = document.getElementById("password").value;
     let pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}|:"<>?,./;'`~\[\]\\])[A-Za-z\d!@#$%^&*()_+\-={}|:"<>?,./;`~'\[\]\\]{6,20}$/;
      if (pattern.test(password)){
          return true
      }
-     else {
+     else if (val !== 1){
          document.getElementById('alert').style.display='inline-block';
          document.getElementById('alert').value='密码强度较低';
          return false
+     }
+     else {
+         alert('密码强度较低');
+         return false;
      }
 }
 
@@ -94,6 +98,9 @@ function getPar(par){
         get_par = get_par.slice(0, nextPar);
     }
     return get_par;
+}
+function imageType() {
+    
 }
 
 /**
@@ -131,7 +138,7 @@ function fadeOutS(element,speed=15){
         },speed);
     }
 }
-
+//用于高亮登录注册页的一些提示
 function highLight(ele){
     document.getElementById(ele).style.color = "rgb(255, 255, 255)";
 }
@@ -139,8 +146,8 @@ function deHighLight(ele) {
     document.getElementById(ele).style.color = ""
 }
 
-
 /**
+ *计算哈希值,目前无用
  *
  * @param message
  * @returns {Promise<string>}
